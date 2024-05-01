@@ -1,3 +1,86 @@
 <p>signup works!</p> 
 
 
+<p>templatedrivenform works!</p>
+<!-- {{fname.dirty}}
+{{fname.pristine}}
+{{fname.touched}}
+{{fname.untouched}}
+{{fname.valid}}
+{{fname.invalid}} -->
+<div class="row justify-content-center">
+    <div class="col-md-6 justify-content-center">
+        <h1 class=" text-center text-primary">FORM CONTROL</h1>
+        <form #formone="ngForm">
+            <label class="formGroup" for="">First Name</label>
+            <input type="text" class="form-control my-2" [(ngModel)]="contact.firstname" name="fname" #fname="ngModel" required [class.is-valid]="fname.valid" [class.is-invalid]="fname.invalid && fname.touched">
+            <div *ngIf="fname.invalid && fname.dirty">
+                <span class="text-danger" *ngIf="fname?.errors?.['required']">
+                    This field is required
+                </span>
+            </div>
+            
+            <label class="formGroup" for="">Last Name</label>
+            <input type="text" class="form-control my-2" [(ngModel)]="contact.lastname" name="lname" #lname="ngModel" required [class.is-valid]="lname.valid" [class.is-invalid]="lname.invalid && lname.touched">
+            <div *ngIf="lname.invalid && lname.dirty">
+                <span class="text-danger" *ngIf="lname?.errors?.['required']">
+                    This field is required
+                </span>
+            </div>
+            
+                    <!-- <label class="formGroup" for="">Gender</label>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" id="maleCheckbox" [(ngModel)]="contact.gender" name="gender" value="male">
+                <label class="form-check-label" for="maleCheckbox">
+                    Male
+                </label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" id="femaleCheckbox" [(ngModel)]="contact.gender" name="gender" value="female">
+                <label class="form-check-label" for="femaleCheckbox">
+                    Female
+                </label>
+            </div>
+            <div *ngIf="formone.submitted && !contact.gender" class="text-danger">
+                Gender is required
+            </div> -->
+
+
+            <label class="formGroup" for="">Email</label>
+            <input type="email" class="form-control my-2" [(ngModel)]="contact.email" name="em" #em="ngModel" required email [class.is-valid]="em.valid" [class.is-invalid]="em.invalid && em.touched">
+            <div *ngIf="em.invalid && em.dirty">
+                <span class="text-danger" *ngIf="em?.errors?.['required']">
+                    This field is required
+                </span>
+                <span class="text-danger" *ngIf="em?.errors?.['email']">
+                    Invalid email format
+                </span>
+            </div>
+
+            <label class="formGroup" for="">Password</label>
+            <input type="password" class="form-control my-2" [(ngModel)]="contact.password" name="pass" #pass="ngModel" required minlength="8"  required pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{10,}$" [class.is-valid]="pass.valid" [class.is-invalid]="pass.invalid && pass.touched">
+            <div *ngIf="pass.invalid && pass.dirty">
+                <span class="text-danger" *ngIf="pass?.errors?.['required']">
+                    This field is required
+                </span>
+                <span class="text-danger" *ngIf="pass?.errors?.['pattern']">
+                    Password must contain at least one uppercase letter, one lowercase letter, and one digit, and be at least 10 characters long.
+                </span>
+            </div>
+            
+                <label class="formGroup" for="">Address</label>
+            <input type="text" class="form-control my-2" [(ngModel)]="contact.address" name="address" #address="ngModel" required address [class.is-valid]="address.valid" [class.is-invalid]="address.invalid && address.touched">
+            <div *ngIf="address.invalid && address.dirty">
+            </div>
+
+           
+
+            <button (click)="submit()" class="btn btn-primary" [disabled]="formone.invalid">Submit</button>
+            <div>
+                <p>{{message}}</p>
+            </div>
+        </form>
+    </div>
+</div>
+
+    
