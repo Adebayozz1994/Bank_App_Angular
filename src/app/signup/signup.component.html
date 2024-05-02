@@ -1,53 +1,57 @@
 <p>signup works!</p> 
 
-
-
-<!-- {{fname.dirty}}
-{{fname.pristine}}
-{{fname.touched}}
-{{fname.untouched}}
-{{fname.valid}}
-{{fname.invalid}} -->
 <div class="row justify-content-center">
     <div class="col-md-6 justify-content-center">
-        <h1 class=" text-center text-primary">FORM CONTROL</h1>
+        <h1 class=" text-center text-red-500">SIGNUP FORM</h1>
         <form #formone="ngForm">
-            <label class="formGroup" for="">First Name</label>
-            <input type="text" class="form-control my-2" [(ngModel)]="contact.firstname" name="fname" #fname="ngModel" required [class.is-valid]="fname.valid" [class.is-invalid]="fname.invalid && fname.touched">
+            <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" for="">First Name</label>
+            <input type="text" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" [(ngModel)]="contact.firstname" name="fname" #fname="ngModel" required [class.is-valid]="fname.valid" [class.is-invalid]="fname.invalid && fname.touched" placeholder="FIRSTNAME">
             <div *ngIf="fname.invalid && fname.dirty">
                 <span class="text-danger" *ngIf="fname?.errors?.['required']">
                     This field is required
                 </span>
             </div>
             
-            <label class="formGroup" for="">Last Name</label>
-            <input type="text" class="form-control my-2" [(ngModel)]="contact.lastname" name="lname" #lname="ngModel" required [class.is-valid]="lname.valid" [class.is-invalid]="lname.invalid && lname.touched">
+            <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" for="">Last Name</label>
+            <input type="text" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" [(ngModel)]="contact.lastname" name="lname" #lname="ngModel" required [class.is-valid]="lname.valid" [class.is-invalid]="lname.invalid && lname.touched" placeholder="LASTNAME">
             <div *ngIf="lname.invalid && lname.dirty">
                 <span class="text-danger" *ngIf="lname?.errors?.['required']">
                     This field is required
                 </span>
             </div>
             
-                    <!-- <label class="formGroup" for="">Gender</label>
-            <div class="form-check">
-                <input class="form-check-input" type="radio" id="maleCheckbox" [(ngModel)]="contact.gender" name="gender" value="male">
-                <label class="form-check-label" for="maleCheckbox">
+                    <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" for="">Gender</label>
+            <div class="flex items-center ">
+                <input class="mb-2 mx-2 w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-blue-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800" type="radio" id="maleCheckbox" [(ngModel)]="contact.gender" name="gender" value="male">
+                <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" for="maleCheckbox">
                     Male
                 </label>
             </div>
-            <div class="form-check">
-                <input class="form-check-input" type="radio" id="femaleCheckbox" [(ngModel)]="contact.gender" name="gender" value="female">
-                <label class="form-check-label" for="femaleCheckbox">
+            <div class="flex items-center ">
+                <input class="mb-2 mx-2 w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-blue-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800" type="radio" id="femaleCheckbox" [(ngModel)]="contact.gender" name="gender" value="female">
+                <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" for="femaleCheckbox">
                     Female
                 </label>
             </div>
             <div *ngIf="formone.submitted && !contact.gender" class="text-danger">
                 Gender is required
-            </div> -->
+            </div>
 
 
-            <label class="formGroup" for="">Email</label>
-            <input type="email" class="form-control my-2" [(ngModel)]="contact.email" name="em" #em="ngModel" required email [class.is-valid]="em.valid" [class.is-invalid]="em.invalid && em.touched">
+            <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" for="">Phone-number</label>
+            <input type="number" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" [(ngModel)]="contact.number" name="num" #num="ngModel" required minlength="8"  required  [class.is-valid]="pass.valid" [class.is-invalid]="num.invalid && num.touched" placeholder="+234-000-0000-000">
+            <div *ngIf="num.invalid && num.dirty">
+                <span class="text-danger" *ngIf="num?.errors?.['required']">
+                    This field is required
+                </span>
+                <span class="text-danger" *ngIf="num?.errors?.['pattern']">
+                    Password must contain at least one uppercase letter, one lowercase letter, and one digit, and be at least 10 characters long.
+                </span>
+            </div>
+
+
+            <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" for="">Email</label>
+            <input type="email" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" [(ngModel)]="contact.email" name="em" #em="ngModel" required email [class.is-valid]="em.valid" [class.is-invalid]="em.invalid && em.touched" placeholder="EMAIL">
             <div *ngIf="em.invalid && em.dirty">
                 <span class="text-danger" *ngIf="em?.errors?.['required']">
                     This field is required
@@ -57,8 +61,8 @@
                 </span>
             </div>
 
-            <label class="formGroup" for="">Password</label>
-            <input type="password" class="form-control my-2" [(ngModel)]="contact.password" name="pass" #pass="ngModel" required minlength="8"  required pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{10,}$" [class.is-valid]="pass.valid" [class.is-invalid]="pass.invalid && pass.touched">
+            <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" for="">Password</label>
+            <input type="password" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" [(ngModel)]="contact.password" name="pass" #pass="ngModel" required minlength="8"  required pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{10,}$" [class.is-valid]="pass.valid" [class.is-invalid]="pass.invalid && pass.touched" placeholder="PASSWORD">
             <div *ngIf="pass.invalid && pass.dirty">
                 <span class="text-danger" *ngIf="pass?.errors?.['required']">
                     This field is required
@@ -68,14 +72,14 @@
                 </span>
             </div>
             
-                <label class="formGroup" for="">Address</label>
-            <input type="text" class="form-control my-2" [(ngModel)]="contact.address" name="address" #address="ngModel" required address [class.is-valid]="address.valid" [class.is-invalid]="address.invalid && address.touched">
+                <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" for="">Address</label>
+            <input type="text" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" [(ngModel)]="contact.address" name="address" #address="ngModel" required address [class.is-valid]="address.valid" [class.is-invalid]="address.invalid && address.touched" placeholder="ADDRESS">
             <div *ngIf="address.invalid && address.dirty">
             </div>
 
            
 
-            <button (click)="submit()" class="btn btn-primary" [disabled]="formone.invalid">Submit</button>
+            <button class="mt-5" mat-raised-button color="warn" [disabled]="formone.invalid" (click)="submit()">Submit</button>
             <div>
                 <p>{{message}}</p>
             </div>

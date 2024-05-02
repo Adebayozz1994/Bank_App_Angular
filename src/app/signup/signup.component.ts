@@ -3,20 +3,24 @@ import { CommonModule } from '@angular/common';
 import { FormBuilder, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
+import { MaterialmoduleModule } from '../materialmodule/materialmodule.module';
 
 
 interface ContactInterface{
   firstname:string,
   lastname:string,
   email:string,
-  password:string
-  address: string 
+  password:string,
+  address: string, 
+  gender:string,
+  number:string,
+  // 
 }
 
 @Component({
   selector: 'app-signup',
   standalone: true,
-  imports: [FormsModule, CommonModule,ReactiveFormsModule, HttpClientModule],
+  imports: [FormsModule, CommonModule, HttpClientModule,MaterialmoduleModule],
   templateUrl: './signup.component.html',
   styleUrl: './signup.component.css'
 })
@@ -29,7 +33,9 @@ export class SignupComponent {
     lastname:'',
     email:'',
    password:'',
-    address:''
+    address:'',
+    gender:'',
+    number:''
   
  }
 
