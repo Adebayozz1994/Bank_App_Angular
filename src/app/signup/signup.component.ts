@@ -12,8 +12,8 @@ interface ContactInterface{
   email:string,
   password:string,
   address: string, 
+  phone_number:string,
   gender:string,
-  number:string,
   // 
 }
 
@@ -35,7 +35,7 @@ export class SignupComponent {
    password:'',
     address:'',
     gender:'',
-    number:''
+    phone_number:''
   
  }
 
@@ -43,11 +43,12 @@ export class SignupComponent {
  submit() {
 
    const UserDetails = {
-     name: this.contact.firstname,
+     first_name: this.contact.firstname,
      last_name: this.contact.lastname,
      email: this.contact.email,
      password: this.contact.password,
-     address: this.contact.address
+     address: this.contact.address,
+     gender: this.contact.gender,
    }
    console.log(UserDetails);
    
