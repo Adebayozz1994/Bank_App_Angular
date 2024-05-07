@@ -39,7 +39,7 @@
 
 
             <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" for="">Phone-Number</label>
-            <input type="number" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" [(ngModel)]="contact.phone_number" name="num" #num="ngModel" required minlength="8"  required  [class.is-valid]="pass.valid" [class.is-invalid]="num.invalid && num.touched" placeholder="+234-000-0000-000">
+            <input type="number" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" [(ngModel)]="contact.phone_number" name="num" #num="ngModel" required minlength="12"  required  [class.is-valid]="num.valid" [class.is-invalid]="num.invalid && num.touched" placeholder="+234-000-0000-000">
             <div *ngIf="num.invalid && num.dirty">
                 <span class="text-danger" *ngIf="num?.errors?.['required']">
                     This field is required

@@ -34,7 +34,7 @@ export class SignupComponent {
     first_name:'',
     last_name:'',
     email:'',
-   password:'',
+    password:'',
     address:'',
     phone_number:'',
     gender:''
@@ -54,6 +54,7 @@ export class SignupComponent {
      gender: this.contact.gender
    }
    console.log(UserDetails);
+   console.log('Phone Number:', UserDetails.phone_number);
    this.MyApi.registerUser(UserDetails).subscribe((res:any)=>{
     console.log(res);
     if(res.status==false){
