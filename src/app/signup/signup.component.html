@@ -5,7 +5,7 @@
         <h1 class=" text-center text-red-500">SIGNUP FORM</h1>
         <form #formone="ngForm">
             <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" for="">First Name</label>
-            <input type="text" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" [(ngModel)]="contact.firstname" name="fname" #fname="ngModel" required [class.is-valid]="fname.valid" [class.is-invalid]="fname.invalid && fname.touched" placeholder="FIRSTNAME">
+            <input type="text" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" [(ngModel)]="contact.first_name" name="fname" #fname="ngModel" required [class.is-valid]="fname.valid" [class.is-invalid]="fname.invalid && fname.touched" placeholder="FIRSTNAME">
             <div *ngIf="fname.invalid && fname.dirty">
                 <span class="text-danger" *ngIf="fname?.errors?.['required']">
                     This field is required
@@ -13,7 +13,7 @@
             </div>
             
             <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" for="">Last Name</label>
-            <input type="text" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" [(ngModel)]="contact.lastname" name="lname" #lname="ngModel" required [class.is-valid]="lname.valid" [class.is-invalid]="lname.invalid && lname.touched" placeholder="LASTNAME">
+            <input type="text" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" [(ngModel)]="contact.last_name" name="lname" #lname="ngModel" required [class.is-valid]="lname.valid" [class.is-invalid]="lname.invalid && lname.touched" placeholder="LASTNAME">
             <div *ngIf="lname.invalid && lname.dirty">
                 <span class="text-danger" *ngIf="lname?.errors?.['required']">
                     This field is required
@@ -81,6 +81,7 @@
 
             <button class="mt-5" mat-raised-button color="warn" [disabled]="formone.invalid" (click)="submit()">Submit</button>
             <div>
+                
                 <p>{{message}}</p>
             </div>
         </form>

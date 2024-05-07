@@ -1,18 +1,20 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormBuilder, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 import { MaterialmoduleModule } from '../materialmodule/materialmodule.module';
+import { MyApiCallsService } from '../service/my-api-calls.service';
+
 
 
 interface ContactInterface{
-  firstname:string,
-  lastname:string,
+  first_name:string,
+  last_name:string,
   email:string,
   password:string,
   address: string, 
-  phone_number:string,
+  phone_number:any,
   gender:string,
   // 
 }
@@ -26,16 +28,16 @@ interface ContactInterface{
 })
 
 export class SignupComponent {
-  constructor(public Router:Router,public formBuilder:FormBuilder){}
+  constructor(public Router:Router,public MyApi:MyApiCallsService,public formBuilder:FormBuilder){}
   message:any=''
   public contact :ContactInterface ={
-    firstname:'',
-    lastname:'',
+    first_name:'',
+    last_name:'',
     email:'',
    password:'',
     address:'',
-    gender:'',
-    phone_number:''
+    phone_number:'',
+    gender:''
   
  }
 
@@ -43,14 +45,26 @@ export class SignupComponent {
  submit() {
 
    const UserDetails = {
-     first_name: this.contact.firstname,
-     last_name: this.contact.lastname,
+     first_name: this.contact.first_name,
+     last_name: this.contact.last_name,
      email: this.contact.email,
      password: this.contact.password,
      address: this.contact.address,
-     gender: this.contact.gender,
+     phone_number: this.contact.phone_number,
+     gender: this.contact.gender
    }
    console.log(UserDetails);
-   
+   this.MyApi.registerUser(UserDetails).subscribe((res:any)=>{
+    console.log(res);
+    if(res.status==false){
+      console.log(res.message);
+      this.message=res.message
+    }
+    if(res.status==true){
+      console.log(res.message);
+      this.message=res.message
+      
+    }
+})
   }
 }
