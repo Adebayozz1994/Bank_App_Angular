@@ -13,8 +13,7 @@ export class MyApiCallsService {
   registerUser(data: any){
     return this.http.post('http://localhost/bankapp/frontendconnection.php', data);
   }
-  login(email: string, password: string) {
-    const loginData = { email, password };
-    return this.http.post('http://localhost/bankapp/login.php', loginData);
+  login(data: any) {
+    return this.http.post('http://localhost/bankapp/login.php', data);
   }
 }

@@ -2,31 +2,41 @@ import { Component } from '@angular/core';
 import { MyApiCallsService } from '../service/my-api-calls.service';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { Router} from '@angular/router';
+import { HttpClientModule } from '@angular/common/http';
+import { log } from 'console';
+
+
+interface LoginData {
+  email: string;
+  password: string;
+}
+
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [FormsModule, CommonModule, ],
+  imports: [FormsModule, CommonModule, HttpClientModule ],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })
 export class LoginComponent {
-  email: string = '';
-  password: string = '';
-  errorMessage: string = '';
+  loginData: LoginData = { email: '', password: '' };
+  message: string = '';
 
-  constructor(public authService:MyApiCallsService) {}
+  constructor(public authService:MyApiCallsService,public rout:Router) {}
 
-  onSubmit(){
-    this.authService.login(this.email, this.password).subscribe(
-      (response) => {
-        console.log('Login successful:', response);
-        // Redirect to dashboard or home page upon successful login
+  onSubmit() {
+    console.log('Form submitted:', this.loginData);
+    this.authService.login(this.loginData).subscribe((res: any) => {
+        if (res.status === true) {
+          this.message = res.message;
+          
+        } else {
+          this.message = res.message;
+        }
       },
-      (error) => {
-        console.error('Login failed:', error);
-        this.errorMessage = 'Invalid email or password. Please try again.';
-      }
+      
     );
   }
 }

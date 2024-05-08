@@ -16,6 +16,6 @@ signup(){
   this.rout.navigate([`/signup`]);
 }
 login(){
-  // this.rout.navigate(['/login'])
+  this.rout.navigate(['/login'])
 }
 }
