@@ -4,7 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { Router} from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
-import { log } from 'console';
+
 
 
 interface LoginData {
@@ -27,16 +27,22 @@ export class LoginComponent {
   constructor(public authService:MyApiCallsService,public rout:Router) {}
 
   onSubmit() {
-    console.log('Form submitted:', this.loginData);
-    this.authService.login(this.loginData).subscribe((res: any) => {
-        if (res.status === true) {
-          this.message = res.message;
+    this.authService.login(this.loginData).subscribe(
+      (res: any) => {
+        if (res && res.status === true) {
+          console.log('Login successful:', res.message);
           
+          this.rout.navigate(['/navbar']);
         } else {
-          this.message = res.message;
+          console.log('Login failed:', res.message);
+          
         }
       },
-      
+      (error) => {
+        console.error('Login error:', error);
+        
+      }
     );
-  }
+  
+}
 }
