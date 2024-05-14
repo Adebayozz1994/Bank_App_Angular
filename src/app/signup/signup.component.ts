@@ -54,18 +54,28 @@ export class SignupComponent {
      gender: this.contact.gender
    }
    console.log(UserDetails);
+
    console.log('Phone Number:', UserDetails.phone_number);
-   this.MyApi.registerUser(UserDetails).subscribe((res:any)=>{
-    console.log(res);
-    if(res.status==false){
-      console.log(res.message);
-      this.message=res.message
+   this.MyApi.registerUser(UserDetails).subscribe(
+    (res: any) => {
+      console.log(res);
+      if (res.status) {
+        this.message = res.message;
+       
+        const userArray = JSON.parse(localStorage.getItem('Userdetails') || '[]');
+        userArray.push(UserDetails);
+        localStorage.setItem('Userdetails', JSON.stringify(userArray));
+        
+        this.Router.navigate(['/login']);
+      } else {
+        this.message = res.message;
+      }
+    },
+    (error) => {
+      console.error('API Error:', error);
+      this.message = 'An error occurred during registration.';
     }
-    if(res.status==true){
-      console.log(res.message);
-      this.message=res.message
-      
-    }
-})
-  }
+  );
+}
+  
 }
