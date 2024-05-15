@@ -10,7 +10,6 @@ import { HttpClientModule } from '@angular/common/http';
 interface LoginData {
   email: string;
   password: string;
-
 }
 
 
@@ -22,16 +21,18 @@ interface LoginData {
   styleUrl: './login.component.css'
 })
 export class LoginComponent implements OnInit{
- public email = ''
+   public email = ''
  public password = ''
 public studentarray: LoginData[] = [];
  message = ''
+  
 
   constructor(public authService:MyApiCallsService,public rout:Router) {}
+
   ngOnInit(): void {
     this.studentarray = JSON.parse(localStorage['Userdetails']);
     console.log(this.studentarray);
-    
+
   }
   onSubmit(){
     console.log(this.email,this.password);
@@ -43,7 +44,7 @@ public studentarray: LoginData[] = [];
           this.message = ''; 
       }, 2000);
   console.log("login failed");
-  
+
 }
 else{
 
@@ -53,24 +54,4 @@ else{
 }
 }
 }
-
-  
-    // this.authService.login(this.loginData).subscribe(
-    //   (res: any) => {
-    //     if (res && res.status === true) {
-    //       console.log('Login successful:', res.message);
-          
-    //       this.rout.navigate(['/profile']);
-    //     } else {
-    //       console.log('Login failed:', res.message);
-          
-    //     }
-    //   },
-    //   (error) => {
-    //     console.error('Login error:', error);
-        
-    //   }
-    // );
-  
-
 

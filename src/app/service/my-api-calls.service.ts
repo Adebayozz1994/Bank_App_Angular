@@ -8,7 +8,9 @@ import { Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
+
 export class MyApiCallsService {
+  
   // private profileUrl = 'http://localhost/bankapp/profile.php';
   constructor(
     public http: HttpClient
@@ -23,5 +25,5 @@ export class MyApiCallsService {
   // profile(): Observable<any> {
   //   return this.http.get<any>(this.profileUrl);
   // }
-  user: any;
+  user:any
 }

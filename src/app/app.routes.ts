@@ -4,6 +4,8 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { SignupComponent } from './signup/signup.component';
 import { LoginComponent } from './login/login.component';
 import { ProfileComponent } from './profile/profile.component';
+import { AboutComponent } from './about/about.component';
+import { ContactComponent } from './contact/contact.component';
 
 
 
@@ -13,5 +15,12 @@ export const routes: Routes = [
     {path:'signup', component: SignupComponent},
     {path:'login', component: LoginComponent},
     {path:'profile', component: ProfileComponent},
+    {path:'about', component: AboutComponent},
+    {path:'contact', component: ContactComponent},
+    {path:'foo', component: ContactComponent},
+
+
+
+
 
 ];
