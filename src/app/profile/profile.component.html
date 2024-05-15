@@ -1,6 +1,8 @@
 <p>profile works!</p>
-<div>
-    <h2>Profile Details</h2>
-    <p>First Name: {{user.first_name }}</p>
-    <p>Last Name: {{user.last_name}}</p>
-</div>
+
+<div *ngIf="currentUser">
+    <h2>Welcome, {{currentUser.first_name }} {{currentUser.last_name }}</h2>
+    <p>Email: {{ currentUser.email }}</p>
+    <p>Number: {{currentUser.phone_number}}</p>
+  </div>
+  

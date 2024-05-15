@@ -55,17 +55,12 @@ export class SignupComponent {
    }
    console.log(UserDetails);
 
-   console.log('Phone Number:', UserDetails.phone_number);
+  //  console.log('Phone Number:', UserDetails.phone_number);
    this.MyApi.registerUser(UserDetails).subscribe(
     (res: any) => {
       console.log(res);
       if (res.status) {
-        this.message = res.message;
-       
-        const userArray = JSON.parse(localStorage.getItem('Userdetails') || '[]');
-        userArray.push(UserDetails);
-        localStorage.setItem('Userdetails', JSON.stringify(userArray));
-        
+        this.message = res.message; 
         this.Router.navigate(['/login']);
       } else {
         this.message = res.message;
