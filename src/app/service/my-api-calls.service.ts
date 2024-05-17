@@ -10,6 +10,7 @@ import { BehaviorSubject, Observable, tap } from 'rxjs';
 })
 
 export class MyApiCallsService {
+  // private apiUrl = 'http://localhost/bankapp/profile.php';
  
   private currentUserSubject: BehaviorSubject<any> = new BehaviorSubject<any>(null);
   public currentUser: Observable<any> = this.currentUserSubject.asObservable();
@@ -38,8 +39,10 @@ export class MyApiCallsService {
   logout(): void {
     this.currentUserSubject.next(null); 
   }
-  // profile(): Observable<any> {
-  //   return this.http.get<any>(this.profileUrl);
-  // }
-  user:any 
+
+
+  uploadProfilePicture(data: FormData): Observable<any>{
+    return this.http.post('http://localhost/bankapp/UploadHandler.php', data);
+  }
+ 
 }
