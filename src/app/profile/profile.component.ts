@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { MyApiCallsService } from '../service/my-api-calls.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -15,7 +15,7 @@ export class ProfileComponent implements OnInit, OnDestroy{
 
   currentUser: any;
   currentUserSubscription: Subscription | undefined;
-  selectedFile: File | null = null;
+  @ViewChild('fileInput') fileInput!: ElementRef<HTMLInputElement>;
 
 constructor(public authService:MyApiCallsService){}
 
@@ -36,29 +36,23 @@ ngOnDestroy(): void {
 }
 
 
-onFileSelected(event: Event): void {
-  const input = event.target as HTMLInputElement;
-  if (input.files && input.files.length && 0) {
-    this.selectedFile = input.files[0];
-  }
-}
+
+
 uploadProfilePicture(): void {
-  if (this.selectedFile) {
+  const file = this.fileInput.nativeElement.files?.[0]; 
+  console.log(file);
+  
+  if (file) {
     const formData = new FormData();
-    formData.append('file', this.selectedFile);
+    formData.append('file', file);
     formData.append('userId', this.currentUser.id);
 
     this.authService.uploadProfilePicture(formData).subscribe(
       (res: any) => {
-        if (res && res.success) {
+        if (res && res.status) {
           this.currentUser.profile_picture_url = res.profile_picture_url;
-        } else {
-          console.error('Error uploading profile picture', res.error);
-        }
+        } 
       },
-      (error: any) => {
-        console.error('Error uploading profile picture', error);
-      }
     );
   }
 }
