@@ -24,6 +24,12 @@ ngOnInit(): void {
   this.currentUserSubscription = this.authService.currentUser.subscribe(
     (user) => {
       this.currentUser = user;
+      // user['profile_picture'];
+      console.log(user);
+      // console.log(user['profile_picture']);
+      
+      
+      
     }
   );
 }
@@ -45,7 +51,7 @@ uploadProfilePicture(): void {
   if (file) {
     const formData = new FormData();
     formData.append('file', file);
-    formData.append('userId', this.currentUser.id);
+    formData.append('userId', this.currentUser.user_id);
 
     this.authService.uploadProfilePicture(formData).subscribe(
       (res: any) => {
