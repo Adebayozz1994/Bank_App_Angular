@@ -49,10 +49,16 @@ uploadProfilePicture(): void {
 
     this.authService.uploadProfilePicture(formData).subscribe(
       (res: any) => {
-        if (res && res.status) {
-          this.currentUser.profile_picture_url = res.profile_picture_url;
-        } 
+        if (res && res.success) {
+          console.log(res);
+          this.currentUser.profile_picture = res.profile_picture;
+        } else {
+          console.error('Error uploading profile picture:', res.error);
+        }
       },
+      (error) => {
+        console.error('Error uploading profile picture:', error);
+      }
     );
   }
 }
