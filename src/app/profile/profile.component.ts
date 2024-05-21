@@ -24,10 +24,6 @@ ngOnInit(): void {
   this.currentUserSubscription = this.authService.currentUser.subscribe(
     (user) => {
       this.currentUser = user;
-      // user['profile_picture'];
-      console.log(user);
-      // console.log(user['profile_picture']);
-      
       
       
     }
@@ -57,7 +53,7 @@ uploadProfilePicture(): void {
       (res: any) => {
         if (res && res.success) {
           console.log(res);
-          this.currentUser.profile_picture = res.profile_picture;
+          this.currentUser.profile_picture = res.profile_picture_url;
         } else {
           console.error('Error uploading profile picture:', res.error);
         }
