@@ -4,7 +4,6 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Subscription } from 'rxjs';
 
-
 @Component({
   selector: 'app-profile',
   standalone: true,
@@ -65,12 +64,4 @@ uploadProfilePicture(): void {
     );
   }
 }
-
-updateProfilePicture(url: string): void {
-  const imgElement = document.querySelector('#profilePicture') as HTMLImageElement;
-  if (imgElement) {
-    imgElement.src = url;
-  }
-}
-
 }

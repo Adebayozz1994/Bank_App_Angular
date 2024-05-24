@@ -1,5 +1,7 @@
 import { Component} from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { MyApiCallsService } from '../service/my-api-calls.service';
+import { Subscription } from 'rxjs';
 
 
 @Component({
@@ -13,11 +15,26 @@ import { CommonModule } from '@angular/common';
   ]
 })
 export class NavbarComponent {
+  currentUser: any;
+  currentUserSubscription: Subscription | undefined;
 
     isProfileMenuOpen: boolean = false;
     isMobileMenuOpen: boolean = false;
   
-    constructor() {}
+    constructor(public authService: MyApiCallsService) {}
+    ngOnInit(): void {
+      this.currentUserSubscription = this.authService.currentUser.subscribe(
+        (user) => {
+          this.currentUser = user;
+        }
+      );
+    }
+  
+    ngOnDestroy(): void {
+      if (this.currentUserSubscription) {
+        this.currentUserSubscription.unsubscribe();
+      }
+    }
   
     toggleProfileMenu(): void {
       this.isProfileMenuOpen = !this.isProfileMenuOpen;
