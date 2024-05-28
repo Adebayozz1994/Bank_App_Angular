@@ -12,7 +12,8 @@ import { Subscription } from 'rxjs';
   styleUrl: './profile.component.css'
 })
 export class ProfileComponent implements OnInit, OnDestroy{
-
+  accountDetails: any;
+  transactionHistory: any[] = [];
   currentUser: any;
   currentUserSubscription: Subscription | undefined;
   @ViewChild('fileInput') fileInput!: ElementRef<HTMLInputElement>;
@@ -24,9 +25,11 @@ ngOnInit(): void {
   this.currentUserSubscription = this.authService.currentUser.subscribe(
     (user) => {
       this.currentUser = user;
-      
-      
+      // if (this.currentUser) {
+      //   this.loadAccountDetails();
+      // }
     }
+    
   );
 }
 
@@ -64,4 +67,26 @@ uploadProfilePicture(): void {
     );
   }
 }
+
+
+// loadAccountDetails(): void {
+//   this.authService.getAccountDetails(this.currentUser.user_id).subscribe(
+//     (res: any) => {
+//       if (res && res.status === true) {
+//         this.accountDetails = res.account;
+//         this.loadTransactionHistory(this.accountDetails.account_id);
+//       }
+//     }
+//   );
+// }
+
+// loadTransactionHistory(accountId: any): void {
+//   this.authService.getTransactionHistory(accountId).subscribe(
+//     (res: any) => {
+//       if (res && res.status === true) {
+//         this.transactionHistory = res.transactions;
+//       }
+//     }
+//   );
+// }
 }
