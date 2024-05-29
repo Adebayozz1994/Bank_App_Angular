@@ -28,16 +28,25 @@ ngOnInit(): void {
   });
  
 
-  this.currentUserSubscription = this.authService.currentUser.subscribe(
-    
-    (user) => {
 
+  this.currentUserSubscription = this.authService.currentUser.subscribe(
+    (user) => {
       this.currentUser = user;
       if (this.currentUser) {
-        this.loadAccountDetails();
+        this.createOrGetAccount();
       }
     }
-    
+  );
+}
+
+createOrGetAccount(): void {
+  this.authService.createOrGetAccount(this.currentUser.user_id).subscribe(
+    (res: any) => {
+      if (res && res.status === true) {
+        this.accountDetails = res.account;
+        // this.loadTransactionHistory(this.accountDetails.user_id);
+      }
+    }
   );
 }
 
@@ -77,24 +86,24 @@ uploadProfilePicture(): void {
 }
 
 
-loadAccountDetails(): void {
-  this.authService.getAccountDetails(this.currentUser.user_id).subscribe(
-    (res: any) => {
-      if (res && res.status === true) {
-        this.accountDetails = res.account;
-        this.loadTransactionHistory(this.accountDetails.user_id);
-      }
-    }
-  );
-}
+// loadAccountDetails(): void {
+//   this.authService.getAccountDetails(this.currentUser.user_id).subscribe(
+//     (res: any) => {
+//       if (res && res.status === true) {
+//         this.accountDetails = res.account;
+//         this.loadTransactionHistory(this.accountDetails.user_id);
+//       }
+//     }
+//   );
+// }
 
-loadTransactionHistory(accountId: any): void {
-  this.authService.getTransactionHistory(accountId).subscribe(
-    (res: any) => {
-      if (res && res.status === true) {
-        this.transactionHistory = res.transactions;
-      }
-    }
-  );
-}
+// loadTransactionHistory(accountId: any): void {
+//   this.authService.getTransactionHistory(accountId).subscribe(
+//     (res: any) => {
+//       if (res && res.status === true) {
+//         this.transactionHistory = res.transactions;
+//       }
+//     }
+//   );
+// }
 }

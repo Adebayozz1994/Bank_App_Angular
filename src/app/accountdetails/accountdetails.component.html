@@ -1,0 +1,11 @@
+<p>accountdetails works!</p>
+<div *ngIf="accountDetails" class="container mx-auto p-6 max-w-md bg-white rounded-lg shadow-md">
+    <h2 class="text-2xl font-bold mb-6 text-center text-gray-800">Account Details</h2>
+    <div class="space-y-4">
+      <p class="text-gray-600"><strong class="text-gray-900">Account Number:</strong> {{ accountDetails.account_number }}</p>
+      <p class="text-gray-600"><strong class="text-gray-900">Balance:</strong> {{ accountDetails.balance }}</p>
+      <p class="text-gray-600"><strong class="text-gray-900">User ID:</strong> {{ accountDetails.user_id }}</p>
+    </div>
+  </div>
+  
+  
