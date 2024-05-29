@@ -18,16 +18,24 @@ export class ProfileComponent implements OnInit, OnDestroy{
   currentUserSubscription: Subscription | undefined;
   @ViewChild('fileInput') fileInput!: ElementRef<HTMLInputElement>;
 
+  profilePictureUrl: string = '';
+
 constructor(public authService:MyApiCallsService){}
 
 ngOnInit(): void {
-  
+  this.authService.profilePicture.subscribe(url => {
+    this.profilePictureUrl = url;
+  });
+ 
+
   this.currentUserSubscription = this.authService.currentUser.subscribe(
+    
     (user) => {
+
       this.currentUser = user;
-      // if (this.currentUser) {
-      //   this.loadAccountDetails();
-      // }
+      if (this.currentUser) {
+        this.loadAccountDetails();
+      }
     }
     
   );
@@ -69,24 +77,24 @@ uploadProfilePicture(): void {
 }
 
 
-// loadAccountDetails(): void {
-//   this.authService.getAccountDetails(this.currentUser.user_id).subscribe(
-//     (res: any) => {
-//       if (res && res.status === true) {
-//         this.accountDetails = res.account;
-//         this.loadTransactionHistory(this.accountDetails.account_id);
-//       }
-//     }
-//   );
-// }
+loadAccountDetails(): void {
+  this.authService.getAccountDetails(this.currentUser.user_id).subscribe(
+    (res: any) => {
+      if (res && res.status === true) {
+        this.accountDetails = res.account;
+        this.loadTransactionHistory(this.accountDetails.user_id);
+      }
+    }
+  );
+}
 
-// loadTransactionHistory(accountId: any): void {
-//   this.authService.getTransactionHistory(accountId).subscribe(
-//     (res: any) => {
-//       if (res && res.status === true) {
-//         this.transactionHistory = res.transactions;
-//       }
-//     }
-//   );
-// }
+loadTransactionHistory(accountId: any): void {
+  this.authService.getTransactionHistory(accountId).subscribe(
+    (res: any) => {
+      if (res && res.status === true) {
+        this.transactionHistory = res.transactions;
+      }
+    }
+  );
+}
 }
