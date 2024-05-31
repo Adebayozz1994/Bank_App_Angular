@@ -68,21 +68,20 @@ export class MyApiCallsService {
     return this.http.post('http://localhost/bankapp/createaccount.php', { user_id: userId });
   }
 
-  // addTransaction(transaction: any): Observable<any> {
-  //   return this.http.post('http://localhost/bankapp/addtransaction.php', transaction);
-  // }
+ 
 
   sendMoney(transaction: any): Observable<any> {
-    return this.http.post('http://localhost/bankapp/transactions.php', transaction);
+    return this.http.post('http://localhost/bankapp/send_receive.php', transaction);
   }
 
   getAccountDetails(accountId: any): Observable<any> {
     return this.http.get(`http://localhost/bankapp/get_account_details.php?account_id=${accountId}`);
   }
 
-  // getTransactionHistory(accountId: any): Observable<any> {
-  //   return this.http.get(`http://localhost/bankapp/get_transaction_history.php?account_id=${accountId}`);
-  // }
+  getTransactionHistory(accountId: any): Observable<any> {
+    return this.http.get(`http://localhost/bankapp/get_transaction_history.php?account_id=${accountId}`);
+}
+
   private isBrowser(): boolean {
     return typeof window !== 'undefined' && typeof localStorage !== 'undefined';
   }

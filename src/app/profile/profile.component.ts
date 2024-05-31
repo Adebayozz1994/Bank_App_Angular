@@ -44,7 +44,7 @@ createOrGetAccount(): void {
     (res: any) => {
       if (res && res.status === true) {
         this.accountDetails = res.account;
-        // this.loadTransactionHistory(this.accountDetails.user_id);
+        this.loadTransactionHistory(this.accountDetails.account_id);
       }
     }
   );
@@ -86,24 +86,27 @@ uploadProfilePicture(): void {
 }
 
 
-// loadAccountDetails(): void {
-//   this.authService.getAccountDetails(this.currentUser.user_id).subscribe(
-//     (res: any) => {
-//       if (res && res.status === true) {
-//         this.accountDetails = res.account;
-//         this.loadTransactionHistory(this.accountDetails.user_id);
-//       }
-//     }
-//   );
-// }
+loadAccountDetails(): void {
+  this.authService.getAccountDetails(this.currentUser.user_id).subscribe(
+    (res: any) => {
+      if (res && res.status === true) {
+        this.accountDetails = res.account;
+        this.loadTransactionHistory(this.accountDetails.user_id);
+      }
+    }
+  );
+}
 
-// loadTransactionHistory(accountId: any): void {
-//   this.authService.getTransactionHistory(accountId).subscribe(
-//     (res: any) => {
-//       if (res && res.status === true) {
-//         this.transactionHistory = res.transactions;
-//       }
-//     }
-//   );
-// }
+loadTransactionHistory(accountId: string): void {
+  this.authService.getTransactionHistory(accountId).subscribe(
+    (res: any) => {
+      if (res && res.status === true) {
+        this.transactionHistory = res.transactions;
+      }
+    },
+    (error) => {
+      console.error('Error fetching transaction history:', error);
+    }
+  );
+}
 }

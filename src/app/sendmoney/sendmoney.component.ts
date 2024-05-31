@@ -16,11 +16,12 @@ export class SendmoneyComponent {
 
   constructor(private fb: FormBuilder, private authservice: MyApiCallsService) {
     this.sendMoneyForm = this.fb.group({
-      senderId: ['', Validators.required],
-      receiverId: ['', Validators.required],
+      senderAccountNumber: ['', Validators.required],
+      receiverAccountNumber: ['', Validators.required],
       amount: ['', [Validators.required, Validators.min(1)]]
     });
   }
+
 
   submit() {
     if (this.sendMoneyForm.valid) {
