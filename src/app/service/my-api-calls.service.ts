@@ -74,11 +74,11 @@ export class MyApiCallsService {
     return this.http.post('http://localhost/bankapp/send_receive.php', transaction);
   }
 
-  getAccountDetails(accountId: any): Observable<any> {
-    return this.http.get(`http://localhost/bankapp/get_account_details.php?account_id=${accountId}`);
-  }
+  // getAccountDetails(accountId: any): Observable<any> {
+  //   return this.http.get(`http://localhost/bankapp/get_account_details.php?account_id=${accountId}`);
+  // }
 
-  getTransactionHistory(accountId: any): Observable<any> {
+  getTransactionHistory(accountId: string): Observable<any> {
     return this.http.get(`http://localhost/bankapp/get_transaction_history.php?account_id=${accountId}`);
 }
 

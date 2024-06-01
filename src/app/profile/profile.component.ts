@@ -42,10 +42,15 @@ ngOnInit(): void {
 createOrGetAccount(): void {
   this.authService.createOrGetAccount(this.currentUser.user_id).subscribe(
     (res: any) => {
+      console.log('createOrGetAccount response:', res);
       if (res && res.status === true) {
         this.accountDetails = res.account;
-        this.loadTransactionHistory(this.accountDetails.account_id);
+        console.log('Account details:', this.accountDetails);
+        this.loadTransactionHistory(this.accountDetails.id);
       }
+    },
+    (error) => {
+      console.error('Error in createOrGetAccount:', error);
     }
   );
 }
@@ -86,22 +91,28 @@ uploadProfilePicture(): void {
 }
 
 
-loadAccountDetails(): void {
-  this.authService.getAccountDetails(this.currentUser.user_id).subscribe(
-    (res: any) => {
-      if (res && res.status === true) {
-        this.accountDetails = res.account;
-        this.loadTransactionHistory(this.accountDetails.user_id);
-      }
-    }
-  );
-}
+// loadAccountDetails(): void {
+//   this.authService.getAccountDetails(this.currentUser.user_id).subscribe(
+//     (res: any) => {
+//       if (res && res.status === true) {
+//         this.accountDetails = res.account;
+//         this.loadTransactionHistory(this.accountDetails.user_id);
+//       }
+//     }
+//   );
+// }
 
 loadTransactionHistory(accountId: string): void {
+  console.log('Loading transaction history for account ID:', accountId);
   this.authService.getTransactionHistory(accountId).subscribe(
     (res: any) => {
+      console.log('Transaction history response:', res);
       if (res && res.status === true) {
         this.transactionHistory = res.transactions;
+        console.log(res.transactions);
+        
+      } else {
+        console.error('Failed to fetch transaction history:', res.message);
       }
     },
     (error) => {
@@ -109,4 +120,6 @@ loadTransactionHistory(accountId: string): void {
     }
   );
 }
+
+
 }

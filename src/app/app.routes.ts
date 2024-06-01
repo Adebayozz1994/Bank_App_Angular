@@ -8,7 +8,7 @@ import { AboutComponent } from './about/about.component';
 import { ContactComponent } from './contact/contact.component';
 import { FooterpageComponent } from './footerpage/footerpage.component';
 import { SendmoneyComponent } from './sendmoney/sendmoney.component';
-import { AccountdetailsComponent } from './accountdetails/accountdetails.component';
+// import { AccountdetailsComponent } from './accountdetails/accountdetails.component';
 
 
 
@@ -22,7 +22,7 @@ export const routes: Routes = [
     {path:'about', component: AboutComponent},
     {path:'contact', component: ContactComponent},
     {path:'sendmoney', component: SendmoneyComponent},
-    {path:'accountdetails', component: AccountdetailsComponent},
+    // {path:'accountdetails', component: AccountdetailsComponent},
 
 
 
