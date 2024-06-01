@@ -2,6 +2,7 @@ import { Component} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MyApiCallsService } from '../service/my-api-calls.service';
 import { Subscription } from 'rxjs';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -21,7 +22,7 @@ export class NavbarComponent {
     isProfileMenuOpen: boolean = false;
     isMobileMenuOpen: boolean = false;
   
-    constructor(public authService: MyApiCallsService) {}
+    constructor(public authService: MyApiCallsService, private router: Router) {}
     ngOnInit(): void {
       this.currentUserSubscription = this.authService.currentUser.subscribe(
         (user) => {
@@ -48,4 +49,11 @@ export class NavbarComponent {
       this.isProfileMenuOpen = false;
       this.isMobileMenuOpen = false;
     }
+
+    logout(): void {
+      this.authService.logout();
+      this.router.navigate(['/login']); 
+    }
+  
+
 }
