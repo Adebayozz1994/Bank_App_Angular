@@ -1,41 +1,44 @@
-<div *ngIf="currentUser" class="max-w-md mx-auto mt-10 p-6 bg-white rounded-lg shadow-lg">
+<div *ngIf="currentUser" class="max-w-2xl mx-auto mt-10 p-6 bg-white rounded-lg shadow-lg">
   <div class="flex flex-col items-center space-y-4">
-    <img *ngIf="currentUser.profile_picture" [src]="'http://localhost/bankapp/pictures/' + currentUser.profile_picture" alt="Profile Picture" class="w-1/3 rounded-full">
-    <div class="mt-4">
+    <img *ngIf="currentUser.profile_picture" [src]="'http://localhost/bankapp/pictures/' + currentUser.profile_picture" alt="Profile Picture" class="w-24 h-24 rounded-full border-2 border-gray-300">
+    <div class="mt-4 w-full flex justify-center">
       <form (ngSubmit)="uploadProfilePicture()" class="flex items-center space-x-4">
-        <input type="file" #fileInput class="">
-        <button type="submit" class="px-4 py-2 bg-green-500 text-white rounded">Submit</button>
+        <input type="file" #fileInput class="text-sm text-gray-700">
+        <button type="submit" class="px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600 transition">Submit</button>
       </form>
     </div>
-    <div class="w-2/3">
-      <h2 class="text-xl font-bold mb-2">{{ currentUser.name }}</h2>
-      <p class="text-gray-600 mb-2">Email: {{ currentUser.email }}</p>
-      <p class="text-gray-600 mb-2">Phone Number: {{ currentUser.phone_number }}</p>
-      <p class="text-gray-600 mb-2">Address: {{ currentUser.address }}</p>
-      <p *ngIf="accountDetails" class="text-gray-600 mb-2">Account Number: {{ accountDetails.account_number }}</p>
-      <p *ngIf="accountDetails" class="text-gray-600 mb-2">Balance: {{ accountDetails.balance | currency }}</p>
+    <div class="w-full md:w-2/3 text-center md:text-left">
+      <p class="text-gray-600 mb-2"><span class="font-semibold text-gray-800">Name:</span> {{ currentUser.first_name }} {{ currentUser.last_name }}</p>
+      <p class="text-gray-600 mb-2"><span class="font-semibold text-gray-800">Gender:</span> {{ currentUser.gender }}</p>
+      <p class="text-gray-600 mb-2"><span class="font-semibold text-gray-800">Email:</span> {{ currentUser.email }}</p>
+      <p class="text-gray-600 mb-2"><span class="font-semibold text-gray-800">Phone Number:</span> {{ currentUser.phone_number }}</p>
+      <p class="text-gray-600 mb-2"><span class="font-semibold text-gray-800">Address:</span> {{ currentUser.address }}</p>
+      <p *ngIf="accountDetails" class="text-gray-600 mb-2"><span class="font-semibold text-gray-800">Account Number:</span> {{ accountDetails.account_number }}</p>
+      <p *ngIf="accountDetails" class="text-gray-600 mb-2"><span class="font-semibold text-gray-800">Balance:</span> {{ accountDetails.balance | currency }}</p>
     </div>
   </div>
 
-  <h3 class="text-lg font-bold mt-6">Transaction History</h3>
-  <table class="mt-2 w-full border-collapse">
-    <thead>
-      <tr class="bg-gray-200">
-        <th class="border p-2">Transaction ID</th>
-        <th class="border p-2">Account ID</th>
-        <th class="border p-2">Amount</th>
-        <th class="border p-2">Transaction Type</th>
-        <th class="border p-2">Timestamp</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let transaction of transactionHistory">
-        <td class="border p-2">{{ transaction.id }}</td>
-        <td class="border p-2">{{ transaction.account_id }}</td>
-        <td class="border p-2">{{ transaction.amount | currency }}</td>
-        <td class="border p-2">{{ transaction.transaction_type }}</td>
-        <td class="border p-2">{{ transaction.timestamp | date:'short' }}</td>
-      </tr>
-    </tbody>
-  </table>
+  <h3 class="text-lg font-bold mt-6 text-center md:text-left">Transaction History</h3>
+  <div class="overflow-x-auto">
+    <table class="mt-2 w-full border-collapse">
+      <thead>
+        <tr class="bg-gray-100 text-gray-700">
+          <th class="border p-2 text-left">Transaction ID</th>
+          <th class="border p-2 text-left">Account ID</th>
+          <th class="border p-2 text-left">Amount</th>
+          <th class="border p-2 text-left">Transaction Type</th>
+          <th class="border p-2 text-left">Timestamp</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let transaction of transactionHistory" class="hover:bg-gray-50 transition">
+          <td class="border p-2">{{ transaction.id }}</td>
+          <td class="border p-2">{{ transaction.account_id }}</td>
+          <td class="border p-2">{{ transaction.amount | currency }}</td>
+          <td class="border p-2">{{ transaction.transaction_type }}</td>
+          <td class="border p-2">{{ transaction.timestamp | date:'short' }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </div>
