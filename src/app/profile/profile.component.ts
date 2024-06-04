@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Subscription } from 'rxjs';
 
+
 @Component({
   selector: 'app-profile',
   standalone: true,
@@ -13,7 +14,7 @@ import { Subscription } from 'rxjs';
 })
 export class ProfileComponent implements OnInit, OnDestroy{
   accountDetails: any;
-  transactionHistory: any[] = [];
+  // transactionHistory: any[] = [];
   currentUser: any;
   currentUserSubscription: Subscription | undefined;
   @ViewChild('fileInput') fileInput!: ElementRef<HTMLInputElement>;
@@ -46,7 +47,7 @@ createOrGetAccount(): void {
       if (res && res.status === true) {
         this.accountDetails = res.account;
         console.log('Account details:', this.accountDetails);
-        this.loadTransactionHistory(this.accountDetails.id);
+        // this.loadTransactionHistory(this.accountDetails.id);
       }
     },
     (error) => {
@@ -102,24 +103,24 @@ uploadProfilePicture(): void {
 //   );
 // }
 
-loadTransactionHistory(accountId: string): void {
-  console.log('Loading transaction history for account ID:', accountId);
-  this.authService.getTransactionHistory(accountId).subscribe(
-    (res: any) => {
-      console.log('Transaction history response:', res);
-      if (res && res.status === true) {
-        this.transactionHistory = res.transactions;
-        console.log(res.transactions);
+// loadTransactionHistory(accountId: string): void {
+//   console.log('Loading transaction history for account ID:', accountId);
+//   this.authService.getTransactionHistory(accountId).subscribe(
+//     (res: any) => {
+//       console.log('Transaction history response:', res);
+//       if (res && res.status === true) {
+//         this.transactionHistory = res.transactions;
+//         console.log(res.transactions);
         
-      } else {
-        console.error('Failed to fetch transaction history:', res.message);
-      }
-    },
-    (error) => {
-      console.error('Error fetching transaction history:', error);
-    }
-  );
-}
+//       } else {
+//         console.error('Failed to fetch transaction history:', res.message);
+//       }
+//     },
+//     (error) => {
+//       console.error('Error fetching transaction history:', error);
+//     }
+//   );
+// }
 
 
 }

@@ -34,7 +34,7 @@ export class LoginComponent{
         if (res && res.status === true) {
           console.log('Login successful:', res.message);
           console.log(res.user.userId);
-        this.rout.navigate(['/profile']);
+        this.rout.navigate(['/mainpage']);
           
           
       }

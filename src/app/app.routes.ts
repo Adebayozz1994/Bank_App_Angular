@@ -9,6 +9,7 @@ import { ContactComponent } from './contact/contact.component';
 import { FooterpageComponent } from './footerpage/footerpage.component';
 import { SendmoneyComponent } from './sendmoney/sendmoney.component';
 import { MainpageComponent } from './mainpage/mainpage.component';
+import { TransactionHistoryComponent } from './transaction-history/transaction-history.component';
 
 
 
@@ -24,6 +25,8 @@ export const routes: Routes = [
     {path:'contact', component: ContactComponent},
     {path:'sendmoney', component: SendmoneyComponent},
     {path:'mainpage', component: MainpageComponent},
+    {path:'transactionhistory', component: TransactionHistoryComponent},
+
 
    
 
