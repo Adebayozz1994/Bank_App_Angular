@@ -44,7 +44,7 @@ export class SendmoneyComponent {
             
             
             setTimeout(() => {
-              this.Router.navigate(['/profile']);
+              this.Router.navigate(['/mainpage']);
               this.resetButtonState();
             }, 2000); 
           },

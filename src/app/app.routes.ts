@@ -10,6 +10,7 @@ import { FooterpageComponent } from './footerpage/footerpage.component';
 import { SendmoneyComponent } from './sendmoney/sendmoney.component';
 import { MainpageComponent } from './mainpage/mainpage.component';
 import { TransactionHistoryComponent } from './transaction-history/transaction-history.component';
+import { AirtimedataComponent } from './airtimedata/airtimedata.component';
 
 
 
@@ -26,6 +27,8 @@ export const routes: Routes = [
     {path:'sendmoney', component: SendmoneyComponent},
     {path:'mainpage', component: MainpageComponent},
     {path:'transactionhistory', component: TransactionHistoryComponent},
+    {path:'airtimedata', component: AirtimedataComponent},
+
 
 
    
