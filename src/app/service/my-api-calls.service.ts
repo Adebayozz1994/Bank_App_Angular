@@ -84,6 +84,18 @@ export class MyApiCallsService {
     return this.http.get(`http://localhost/bankapp/get_transaction_history.php?account_id=${accountId}`);
 }
 
+buyAirtime(accountId: number, phoneNumber: string, amount: number): Observable<any> {
+  return this.http.post('http://localhost/bankapp/buyairtime.php', { accountId, phoneNumber, amount });
+}
+
+buyData(accountId: number, phoneNumber: string, dataPlan: string, amount: number): Observable<any> {
+  return this.http.post('http://localhost/bankapp/buydata.php', { accountId, phoneNumber, dataPlan, amount });
+}
+
+getAccountBalance(accountId: number): Observable<number> {
+  return this.http.get<number>(`http://localhost/bankapp/get_account_details.php?account_id=${accountId}`);
+}
+
   private isBrowser(): boolean {
     return typeof window !== 'undefined' && typeof localStorage !== 'undefined';
   }
