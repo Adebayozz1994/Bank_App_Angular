@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { BehaviorSubject, Observable, tap } from 'rxjs';
+import { BehaviorSubject, Observable, tap, catchError, throwError } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -26,7 +26,16 @@ export class MyApiCallsService {
   }
 
   registerUser(data: any): Observable<any> {
-    return this.http.post('http://localhost/bankapp/frontendconnection.php', data);
+    return this.http.post('http://localhost/bankapp/frontendconnection.php', data)
+      .pipe(
+        tap((response: any) => {
+          // Handle response if needed
+        }),
+        catchError(error => {
+          console.error('Error:', error);
+          return throwError(() => new Error('An error occurred during registration.'));
+        })
+      );
   }
 
   login(data: any): Observable<any> {
@@ -39,6 +48,10 @@ export class MyApiCallsService {
             }
             this.currentUserSubject.next(response.user.userId);
           }
+        }),
+        catchError(error => {
+          console.error('Error:', error);
+          return throwError(() => new Error('An error occurred during login.'));
         })
       );
   }
@@ -60,41 +73,73 @@ export class MyApiCallsService {
             this.currentUserSubject.next(updatedUser);
             this.profilePictureSubject.next(res.profile_picture_url);
           }
+        }),
+        catchError(error => {
+          console.error('Error:', error);
+          return throwError(() => new Error('An error occurred while uploading profile picture.'));
         })
       );
   }
 
   createOrGetAccount(userId: any): Observable<any> {
-    return this.http.post('http://localhost/bankapp/createaccount.php', { user_id: userId });
+    return this.http.post('http://localhost/bankapp/createaccount.php', { user_id: userId })
+      .pipe(
+        catchError(error => {
+          console.error('Error:', error);
+          return throwError(() => new Error('An error occurred while creating or getting account.'));
+        })
+      );
   }
-
- 
 
   sendMoney(transaction: any): Observable<any> {
-    return this.http.post('http://localhost/bankapp/send_receive.php', transaction);
+    return this.http.post('http://localhost/bankapp/send_receive.php', transaction)
+      .pipe(
+        catchError(error => {
+          console.error('Error:', error);
+          return throwError(() => new Error('An error occurred while sending money.'));
+        })
+      );
   }
 
-  // getAccountHolderName(accountNumber: string) {
-  //   return this.http.get(`http://localhost/bankapp/get_account_details.php?accountNumber=${accountNumber}`);
-  // }
-  
-  
-
   getTransactionHistory(accountId: string): Observable<any> {
-    return this.http.get(`http://localhost/bankapp/get_transaction_history.php?account_id=${accountId}`);
-}
+    return this.http.get(`http://localhost/bankapp/get_transaction_history.php?account_id=${accountId}`)
+      .pipe(
+        catchError(error => {
+          console.error('Error:', error);
+          return throwError(() => new Error('An error occurred while fetching transaction history.'));
+        })
+      );
+  }
 
-buyAirtime(accountId: number, phoneNumber: string, amount: number): Observable<any> {
-  return this.http.post('http://localhost/bankapp/buyairtime.php', { accountId, phoneNumber, amount });
-}
+  buyAirtime(accountId: number, phoneNumber: string, amount: number): Observable<any> {
+    return this.http.post('http://localhost/bankapp/buyairtime.php', { accountId, phoneNumber, amount })
+      .pipe(
+        catchError(error => {
+          console.error('Error:', error);
+          return throwError(() => new Error('An error occurred while buying airtime.'));
+        })
+      );
+  }
 
-buyData(accountId: number, phoneNumber: string, dataPlan: string, amount: number): Observable<any> {
-  return this.http.post('http://localhost/bankapp/buydata.php', { accountId, phoneNumber, dataPlan, amount });
-}
+  buyData(accountId: number, phoneNumber: string, dataPlan: string, amount: number): Observable<any> {
+    return this.http.post('http://localhost/bankapp/buydata.php', { accountId, phoneNumber, dataPlan, amount })
+      .pipe(
+        catchError(error => {
+          console.error('Error:', error);
+          return throwError(() => new Error('An error occurred while buying data.'));
+        })
+      );
+  }
 
-getAccountBalance(accountId: number): Observable<number> {
-  return this.http.get<number>(`http://localhost/bankapp/get_account_details.php?account_id=${accountId}`);
-}
+  getAccountBalance(accountId: number): Observable<number> {
+    return this.http.get<number>(`http://localhost/bankapp/get_account_details.php?account_id=${accountId}`)
+      .pipe(
+        catchError(error => {
+          console.error('Error:', error);
+          return throwError(() => new Error('An error occurred while fetching account balance.'));
+        })
+      );
+  }
 
   private isBrowser(): boolean {
     return typeof window !== 'undefined' && typeof localStorage !== 'undefined';

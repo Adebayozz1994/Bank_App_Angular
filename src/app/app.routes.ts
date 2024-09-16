@@ -11,6 +11,7 @@ import { SendmoneyComponent } from './sendmoney/sendmoney.component';
 import { MainpageComponent } from './mainpage/mainpage.component';
 import { TransactionHistoryComponent } from './transaction-history/transaction-history.component';
 import { AirtimedataComponent } from './airtimedata/airtimedata.component';
+import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
 
 
 
@@ -22,6 +23,8 @@ export const routes: Routes = [
     {path:'signup', component: SignupComponent},
     {path:'login', component: LoginComponent},
     {path:'profile', component: ProfileComponent},
+    {path:'admin-dashboard', component: AdminDashboardComponent},
+
     {path:'about', component: AboutComponent},
     {path:'contact', component: ContactComponent},
     {path:'sendmoney', component: SendmoneyComponent},
