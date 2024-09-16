@@ -16,6 +16,7 @@ interface ContactInterface{
   address: string, 
   phone_number:any,
   gender:string,
+  role :string,
   // 
 }
 
@@ -37,7 +38,8 @@ export class SignupComponent {
     password:'',
     address:'',
     phone_number:'',
-    gender:''
+    gender:'',
+    role:''
   
  }
 
@@ -51,7 +53,8 @@ export class SignupComponent {
      password: this.contact.password,
      address: this.contact.address,
      phone_number: this.contact.phone_number,
-     gender: this.contact.gender
+     gender: this.contact.gender,
+     role: this.contact.role
    }
    console.log(UserDetails);
 
