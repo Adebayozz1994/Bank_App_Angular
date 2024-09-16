@@ -1,1 +1,18 @@
-<p>deposit works!</p>
+<form #depositForm="ngForm" (ngSubmit)="onDeposit()" class="max-w-sm mx-auto mt-8 p-6 bg-gray-400 rounded-lg shadow-md">
+    <div class="mb-4">
+      <label for="accountNumber" class="block text-sm font-medium text-gray-700">Account Number:</label>
+      <input type="text" id="accountNumber" name="accountNumber" required [(ngModel)]="depositData.accountNumber"
+             class="mt-1 px-4 py-2 block w-full rounded-md border border-gray-300 shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+    </div>
+    <div class="mb-4">
+      <label for="amount" class="block text-sm font-medium text-gray-700">Amount:</label>
+      <input type="number" id="amount" name="amount" required [(ngModel)]="depositData.amount"
+             class="mt-1 px-4 py-2 block w-full rounded-md border border-gray-300 shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+    </div>
+    <button type="submit" [disabled]="!depositForm.valid"
+            class="w-full bg-gray-800 text-white py-2 px-4 rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
+      Deposit
+    </button>
+    <p *ngIf="message" class="mt-2 text-sm text-red-600">{{ message }}</p>
+  </form>
+  

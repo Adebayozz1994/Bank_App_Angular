@@ -12,6 +12,7 @@ import { MainpageComponent } from './mainpage/mainpage.component';
 import { TransactionHistoryComponent } from './transaction-history/transaction-history.component';
 import { AirtimedataComponent } from './airtimedata/airtimedata.component';
 import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
+import { DepositComponent } from './deposit/deposit.component';
 
 
 
@@ -31,6 +32,7 @@ export const routes: Routes = [
     {path:'mainpage', component: MainpageComponent},
     {path:'transactionhistory', component: TransactionHistoryComponent},
     {path:'airtimedata', component: AirtimedataComponent},
+    {path: 'deposit', component: DepositComponent },
 
 
 

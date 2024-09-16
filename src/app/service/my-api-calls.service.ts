@@ -140,8 +140,18 @@ export class MyApiCallsService {
         })
       );
   }
+  deposit(data: any): Observable<any> {
+    return this.http.post('http://localhost/bankapp/deposit.php', data)
+      .pipe(
+        catchError(error => {
+          console.error('Error:', error);
+          return throwError(() => new Error('An error occurred while depositing money.'));
+        })
+      );
+  }
 
   private isBrowser(): boolean {
     return typeof window !== 'undefined' && typeof localStorage !== 'undefined';
   }
+
 }
