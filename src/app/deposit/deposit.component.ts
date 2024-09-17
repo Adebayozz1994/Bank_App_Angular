@@ -10,35 +10,73 @@ import { HttpClientModule } from '@angular/common/http';
   standalone: true,
   imports: [FormsModule, CommonModule, HttpClientModule],
   templateUrl: './deposit.component.html',
-  styleUrl: './deposit.component.css'
+  styleUrls: ['./deposit.component.css']
 })
 export class DepositComponent {
-  depositData = {
+  depositData: any = {
     accountNumber: '',
-    amount: 0
+    amount: 0,
+    password: ''
   };
-  message = '';
+  message: string = '';
+  isPasswordModalVisible: boolean = false;
+  processing: boolean = false;
 
   constructor(private apiService: MyApiCallsService, private router: Router) {}
 
-  onDeposit() {
-    if (this.depositData.amount <= 0) {
-      this.message = 'Amount must be greater than zero.';
-      return;
-    }
+  // Open the password confirmation modal
+  openPasswordModal() {
+    this.processing = true;
 
-    this.apiService.deposit(this.depositData).subscribe(
-      response => {
-        if (response.status) {
-          this.message = 'Deposit successful!';
+    // Show "Processing" for 2 seconds before displaying the password modal
+    setTimeout(() => {
+      this.processing = false;
+      this.isPasswordModalVisible = true;
+    }, 2000);  // 2 seconds delay
+  }
+
+  // Close the modal
+  closePasswordModal() {
+    this.isPasswordModalVisible = false;
+  }
+
+  // Confirm deposit action (password entered)
+  confirmDeposit() {
+    this.processing = true;
+
+     // Make the deposit API call with password
+     this.apiService.deposit(this.depositData).subscribe(
+      (response) => {
+        if (response && response.status === true) {
+          // First, close the modal
+          this.closePasswordModal();
+
+          // Show success message after a short delay
+          setTimeout(() => {
+            this.message = 'Deposit successful';
+            this.processing = false;
+
+            // Navigate to user profile after showing the success message
+            setTimeout(() => {
+              this.router.navigate(['/profile']);
+            }, 2000); // Delay navigation to allow message to be visible
+          }, 500); // Delay before showing success message to ensure modal closes
+          
         } else {
-          this.message = response.message || 'Deposit failed.';
+          this.message = response.message || 'Deposit failed';
+          this.processing = false;
         }
       },
-      error => {
-        console.error('Error:', error);
-        this.message = 'An error occurred while processing the deposit.';
-      }
     );
+  }
+
+  // Initial deposit action (opens modal)
+  onDeposit() {
+    if (!this.depositData.accountNumber || !this.depositData.amount) {
+      this.message = 'Please fill in all fields';
+      return;
+    }
+    // Open modal to confirm password before proceeding with the deposit
+    this.openPasswordModal();
   }
 }
