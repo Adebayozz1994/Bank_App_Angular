@@ -37,7 +37,7 @@ export class MyApiCallsService {
         })
       );
   }
-
+    
   login(data: any): Observable<any> {
     return this.http.post('http://localhost/bankapp/login.php', data)
       .pipe(
@@ -63,12 +63,17 @@ export class MyApiCallsService {
     this.currentUserSubject.next(null);
   }
 
+  updateUser(user: any) {
+    this.currentUserSubject.next(user);
+  }
+  
   uploadProfilePicture(data: FormData): Observable<any> {
     return this.http.post('http://localhost/bankapp/uploadhandler.php', data)
       .pipe(
         tap((res: any) => {
           if (res && res.success) {
-            const updatedUser = { ...this.currentUserValue, profile_picture: res.profile_picture_url };
+            // Update the current user with the new profile picture URL
+            const updatedUser = { ...this.currentUserSubject.value, profile_picture: res.profile_picture_url };
             localStorage.setItem('currentUser', JSON.stringify(updatedUser));
             this.currentUserSubject.next(updatedUser);
             this.profilePictureSubject.next(res.profile_picture_url);
@@ -80,6 +85,7 @@ export class MyApiCallsService {
         })
       );
   }
+  
 
   createOrGetAccount(userId: any): Observable<any> {
     return this.http.post('http://localhost/bankapp/createaccount.php', { user_id: userId })

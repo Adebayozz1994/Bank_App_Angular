@@ -14,9 +14,10 @@ import { Subscription } from 'rxjs';
 })
 export class ProfileComponent implements OnInit, OnDestroy{
   accountDetails: any;
-  // transactionHistory: any[] = [];
+  transactionHistory: any[] = [];
   currentUser: any;
   currentUserSubscription: Subscription | undefined;
+  profilePictureSubscription: Subscription | undefined;
   @ViewChild('fileInput') fileInput!: ElementRef<HTMLInputElement>;
 
   profilePictureUrl: string = '';
@@ -27,15 +28,18 @@ ngOnInit(): void {
   this.authService.profilePicture.subscribe(url => {
     this.profilePictureUrl = url;
   });
- 
-
-
   this.currentUserSubscription = this.authService.currentUser.subscribe(
     (user) => {
       this.currentUser = user;
       if (this.currentUser) {
+        this.profilePictureUrl = this.currentUser.profile_picture ? `http://localhost/bankapp/pictures/${this.currentUser.profile_picture}` : '';
         this.createOrGetAccount();
       }
+    }
+  );
+  this.profilePictureSubscription = this.authService.profilePicture.subscribe(
+    (url) => {
+      this.profilePictureUrl = url;
     }
   );
 }
@@ -47,7 +51,7 @@ createOrGetAccount(): void {
       if (res && res.status === true) {
         this.accountDetails = res.account;
         console.log('Account details:', this.accountDetails);
-        // this.loadTransactionHistory(this.accountDetails.id);
+        this.loadTransactionHistory(this.accountDetails.id);
       }
     },
     (error) => {
@@ -60,6 +64,9 @@ ngOnDestroy(): void {
   
   if (this.currentUserSubscription) {
     this.currentUserSubscription.unsubscribe();
+  }
+  if (this.profilePictureSubscription) {
+    this.profilePictureSubscription.unsubscribe();
   }
 }
 
@@ -77,8 +84,11 @@ uploadProfilePicture(): void {
     this.authService.uploadProfilePicture(formData).subscribe(
       (res: any) => {
         if (res && res.success) {
+          // Update the currentUser with the new profile picture URL
           this.currentUser.profile_picture = res.profile_picture_url;
           this.profilePictureUrl = res.profile_picture_url;
+          // Optionally update the profile picture URL in the service
+          this.authService.updateUser(this.currentUser);
         } else {
           console.error('Error uploading profile picture:', res.error);
         }
@@ -89,6 +99,8 @@ uploadProfilePicture(): void {
     );
   }
 }
+
+
 
 
 // loadAccountDetails(): void {
@@ -102,24 +114,24 @@ uploadProfilePicture(): void {
 //   );
 // }
 
-// loadTransactionHistory(accountId: string): void {
-//   console.log('Loading transaction history for account ID:', accountId);
-//   this.authService.getTransactionHistory(accountId).subscribe(
-//     (res: any) => {
-//       console.log('Transaction history response:', res);
-//       if (res && res.status === true) {
-//         this.transactionHistory = res.transactions;
-//         console.log(res.transactions);
+loadTransactionHistory(accountId: string): void {
+  console.log('Loading transaction history for account ID:', accountId);
+  this.authService.getTransactionHistory(accountId).subscribe(
+    (res: any) => {
+      console.log('Transaction history response:', res);
+      if (res && res.status === true) {
+        this.transactionHistory = res.transactions;
+        console.log(res.transactions);
         
-//       } else {
-//         console.error('Failed to fetch transaction history:', res.message);
-//       }
-//     },
-//     (error) => {
-//       console.error('Error fetching transaction history:', error);
-//     }
-//   );
-// }
+      } else {
+        console.error('Failed to fetch transaction history:', res.message);
+      }
+    },
+    (error) => {
+      console.error('Error fetching transaction history:', error);
+    }
+  );
+}
 
 
 }
