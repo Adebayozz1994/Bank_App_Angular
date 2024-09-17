@@ -68,8 +68,7 @@ ngOnDestroy(): void {
 
 uploadProfilePicture(): void {
   const file = this.fileInput.nativeElement.files?.[0]; 
-  console.log(file);
-  
+
   if (file) {
     const formData = new FormData();
     formData.append('file', file);
@@ -78,8 +77,8 @@ uploadProfilePicture(): void {
     this.authService.uploadProfilePicture(formData).subscribe(
       (res: any) => {
         if (res && res.success) {
-          console.log(res);
           this.currentUser.profile_picture = res.profile_picture_url;
+          this.profilePictureUrl = res.profile_picture_url;
         } else {
           console.error('Error uploading profile picture:', res.error);
         }
