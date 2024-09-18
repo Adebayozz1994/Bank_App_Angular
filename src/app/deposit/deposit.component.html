@@ -1,5 +1,5 @@
 <!-- deposit.component.html -->
-<form #depositForm="ngForm" (ngSubmit)="onDeposit()" class="max-w-sm mx-auto mt-8 p-6 bg-gray-400 rounded-lg shadow-md">
+<form #depositForm="ngForm" (ngSubmit)="onDeposit()" class="max-w-sm mx-auto mt-32 p-6  bg-gray-400 rounded-lg shadow-md">
     <div class="mb-4">
       <label for="accountNumber" class="block text-sm font-medium text-gray-700">Account Number:</label>
       <input type="text" id="accountNumber" name="accountNumber" required [(ngModel)]="depositData.accountNumber"
