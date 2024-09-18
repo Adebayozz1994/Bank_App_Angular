@@ -1,11 +1,11 @@
-
 <h3 class="text-lg font-bold mt-6 text-center md:text-left">Transaction History</h3>
 <div class="overflow-x-auto">
   <table class="mt-2 w-full border-collapse">
     <thead>
       <tr class="bg-gray-100 text-gray-700">
         <th class="border p-2 text-left">Transaction ID</th>
-        <th class="border p-2 text-left">Account ID</th>
+        <th class="border p-2 text-left">Account Number</th>
+        <th class="border p-2 text-left">Account Name</th>
         <th class="border p-2 text-left">Amount</th>
         <th class="border p-2 text-left">Transaction Type</th>
         <th class="border p-2 text-left">Timestamp</th>
@@ -14,7 +14,8 @@
     <tbody>
       <tr *ngFor="let transaction of transactionHistory" class="hover:bg-gray-50 transition">
         <td class="border p-2">{{ transaction.id }}</td>
-        <td class="border p-2">{{ transaction.account_id }}</td>
+        <td class="border p-2">{{ transaction.account_number }}</td>
+        <td class="border p-2">{{ transaction.account_name }}</td>
         <td class="border p-2">{{ transaction.amount | currency }}</td>
         <td class="border p-2">{{ transaction.transaction_type }}</td>
         <td class="border p-2">{{ transaction.transaction_date }}</td>
