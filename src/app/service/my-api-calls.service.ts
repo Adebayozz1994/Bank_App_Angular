@@ -106,7 +106,10 @@ export class MyApiCallsService {
         })
       );
   }
-
+  getAccountName(accountNumber: string): Observable<any> {
+    return this.http.get(`http://localhost/bankapp/getAccountName.php?accountNumber=${accountNumber}`);
+  }
+  
   getTransactionHistory(accountId: string): Observable<any> {
     return this.http.get(`http://localhost/bankapp/get_transaction_history.php?account_id=${accountId}`)
       .pipe(

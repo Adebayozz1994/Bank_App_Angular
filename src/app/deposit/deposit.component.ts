@@ -18,11 +18,31 @@ export class DepositComponent {
     amount: 0,
     password: ''
   };
+  accountName: string = '';  // Added accountName to hold the retrieved name
   message: string = '';
   isPasswordModalVisible: boolean = false;
   processing: boolean = false;
 
   constructor(private apiService: MyApiCallsService, private router: Router) {}
+
+  // Fetch account holder's name based on account number
+  getAccountName() {
+    if (this.depositData.accountNumber) {
+      this.apiService.getAccountName(this.depositData.accountNumber).subscribe(
+        (response) => {
+          if (response && response.status === true) {
+            this.accountName = response.accountName;  // Set account holder's name
+          } else {
+            this.accountName = '';  // Clear account name if not found
+            this.message = response.message || 'Account not found';
+          }
+        },
+        (error) => {
+          this.message = 'Error fetching account name';
+        }
+      );
+    }
+  }
 
   // Open the password confirmation modal
   openPasswordModal() {
@@ -44,8 +64,8 @@ export class DepositComponent {
   confirmDeposit() {
     this.processing = true;
 
-     // Make the deposit API call with password
-     this.apiService.deposit(this.depositData).subscribe(
+    // Make the deposit API call with password
+    this.apiService.deposit(this.depositData).subscribe(
       (response) => {
         if (response && response.status === true) {
           // First, close the modal
