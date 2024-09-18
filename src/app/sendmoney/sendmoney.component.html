@@ -1,18 +1,27 @@
-<form [formGroup]="sendMoneyForm" (ngSubmit)="openConfirmModal()" class="max-w-lg mx-auto bg-white p-6 mt-10 rounded-lg shadow-md space-y-4">
+<form [formGroup]="sendMoneyForm" (ngSubmit)="openConfirmModal()" class="max-w-lg mx-auto bg-white p-6 mt-28 rounded-lg shadow-md space-y-4">
   <div class="space-y-2">
     <label for="senderAccountNumber" class="block text-gray-700 font-semibold">Sender Account Number</label>
     <input id="senderAccountNumber" formControlName="senderAccountNumber" type="text" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500" placeholder="Enter Sender's Account Number">
+  </div>
+  <div *ngIf="senderAccountName || receiverAccountName" class="mb-4">
+    <p> {{ senderAccountName || 'N/A' }}</p>
+    <!-- <p><strong>Receiver Account Name:</strong> {{ receiverAccountName || 'N/A' }}</p> -->
   </div>
 
   <div class="space-y-2">
     <label for="receiverAccountNumber" class="block text-gray-700 font-semibold">Receiver Account Number</label>
     <input id="receiverAccountNumber" formControlName="receiverAccountNumber" type="text" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500" placeholder="Enter Receiver's Account Number">
   </div>
+  <div *ngIf="senderAccountName || receiverAccountName" class="mb-4">
+    <!-- <p><strong>Sender Account Name:</strong> {{ senderAccountName || 'N/A' }}</p> -->
+    <p> {{ receiverAccountName || 'N/A' }}</p>
+  </div>
 
   <div class="space-y-2">
     <label for="amount" class="block text-gray-700 font-semibold">Amount</label>
     <input id="amount" formControlName="amount" type="number" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500" placeholder="Enter Amount">
   </div>
+
 
   <button [disabled]="sendMoneyForm.invalid" class="w-full px-4 py-2 bg-blue-500 text-white font-semibold rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75 transition-colors disabled:opacity-50">
     {{ buttonState }}
@@ -25,8 +34,8 @@
 <div *ngIf="showModal" class="fixed inset-0 bg-gray-600 bg-opacity-50 flex justify-center items-center">
   <div class="bg-white p-6 rounded-lg shadow-lg w-96">
     <h3 class="text-lg font-bold mb-4 text-gray-700">Confirm Transaction</h3>
-    <p class="mb-2"><strong>Sender Account:</strong> {{ sendMoneyForm.get('senderAccountNumber')?.value }}</p>
-    <p class="mb-2"><strong>Receiver Account:</strong> {{ sendMoneyForm.get('receiverAccountNumber')?.value }}</p>
+    <p class="mb-2"><strong>Sender Account:</strong> {{ sendMoneyForm.get('senderAccountNumber')?.value || 'N/A' }} ({{ senderAccountName || 'N/A' }})</p>
+    <p class="mb-2"><strong>Receiver Account:</strong> {{ sendMoneyForm.get('receiverAccountNumber')?.value || 'N/A' }} ({{ receiverAccountName || 'N/A' }})</p>
     <p class="mb-4"><strong>Amount:</strong> {{ sendMoneyForm.get('amount')?.value | currency }}</p>
 
     <div class="mb-4">
