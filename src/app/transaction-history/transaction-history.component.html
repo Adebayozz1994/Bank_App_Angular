@@ -17,7 +17,7 @@
         <td class="border p-2">{{ transaction.account_id }}</td>
         <td class="border p-2">{{ transaction.amount | currency }}</td>
         <td class="border p-2">{{ transaction.transaction_type }}</td>
-        <td class="border p-2">{{ transaction.timestamp | date:'short' }}</td>
+        <td class="border p-2">{{ transaction.transaction_date }}</td>
       </tr>
     </tbody>
   </table>
