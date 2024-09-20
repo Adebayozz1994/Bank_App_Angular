@@ -163,4 +163,21 @@ export class MyApiCallsService {
     return typeof window !== 'undefined' && typeof localStorage !== 'undefined';
   }
 
+  deleteUser(userId: number): Observable<any> {
+    return this.http.post('http://localhost/bankapp/deleteuser.php', { user_id: userId });
+  }
+
+  editUser(userId: number, data: any): Observable<any> {
+    return this.http.post('http://localhost/bankapp/edituser.php', { user_id: userId, ...data });
+  }
+
+  postNotification(data: any): Observable<any> {
+    return this.http.post('http://localhost/bankapp/post_notification.php', data);
+  }
+
+  getUsers(): Observable<any> {
+    return this.http.get('http://localhost/bankapp/get_users.php');
+  }
+
+
 }

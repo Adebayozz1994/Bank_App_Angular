@@ -1,4 +1,4 @@
-<div *ngIf="currentUser" class="max-w-2xl mx-auto mt-10 p-6 bg-white rounded-lg shadow-lg">
+<div *ngIf="currentUser" class="max-w-2xl mx-auto mt-28 p-6 bg-white rounded-lg shadow-lg">
   <div class="flex flex-col items-center space-y-4">
      <img *ngIf="currentUser.profile_picture" [src]="'http://localhost/bankapp/pictures/' + currentUser.profile_picture" alt="Profile Picture" class="w-24 h-24 rounded-full border-2 border-gray-300">
     <div class="mt-4 w-full flex justify-center">
@@ -18,7 +18,7 @@
     </div>
   </div>
 
-  <h3 class="text-lg font-bold mt-6 text-center md:text-left">Transaction History</h3>
+  <!-- <h3 class="text-lg font-bold mt-6 text-center md:text-left">Transaction History</h3>
   <div class="overflow-x-auto">
     <table class="mt-2 w-full border-collapse">
       <thead>
@@ -42,6 +42,6 @@
         </tr>
       </tbody>
     </table>
-  </div>
+  </div> -->
   
 </div>

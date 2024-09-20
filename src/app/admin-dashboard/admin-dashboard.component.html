@@ -1,1 +1,41 @@
-<p>admin-dashboard works!</p>
+<div class="admin-dashboard-container mt-32">
+    <!-- Manage Money Form -->
+    <form [formGroup]="manageMoneyForm" (ngSubmit)="manageMoney()" class="form-container">
+      <h2>Manage Money</h2>
+      <input formControlName="accountNumber" placeholder="Account Number" class="input-field">
+      <input formControlName="amount" type="number" placeholder="Amount" class="input-field">
+      <select formControlName="operation" class="input-field">
+        <option value="add">Add Money</option>
+        <option value="deduct">Deduct Money</option>
+      </select>
+      <button type="submit" class="btn-submit">Submit</button>
+    </form>
+  
+    <!-- Post Notification Form -->
+    <form [formGroup]="notificationForm" (ngSubmit)="postNotification()" class="form-container">
+      <h2>Post Notification</h2>
+      <textarea formControlName="message" placeholder="Post Notification" class="textarea-field"></textarea>
+      <button type="submit" class="btn-submit">Post</button>
+    </form>
+  
+    <!-- List of Users for Edit/Delete -->
+    <table class="user-table">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let user of users">
+          <td>{{ user.first_name }} {{ user.last_name }}</td>
+          <td>{{ user.email }}</td>
+          <td><button (click)="deleteUser(user.id)" class="btn-delete">Delete</button></td>
+        </tr>
+      </tbody>
+    </table>
+  
+    <p class="message">{{ message }}</p>
+  </div>
+  
