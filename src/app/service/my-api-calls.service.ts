@@ -164,20 +164,37 @@ export class MyApiCallsService {
   }
 
   deleteUser(userId: number): Observable<any> {
-    return this.http.post('http://localhost/bankapp/deleteuser.php', { user_id: userId });
+    return this.http.post('http://localhost/bankapp/deleteuser.php', { user_id: userId }).pipe(
+      catchError(error => {
+        console.error('Error deleting user:', error);
+        return throwError(() => new Error('Error deleting user.'));
+      })
+    );
   }
 
   editUser(userId: number, data: any): Observable<any> {
-    return this.http.post('http://localhost/bankapp/edituser.php', { user_id: userId, ...data });
+    return this.http.post('http://localhost/bankapp/edituser.php', { user_id: userId, ...data }).pipe(
+      catchError(error => {
+        console.error('Error editing user:', error);
+        return throwError(() => new Error('Error editing user.'));
+      })
+    );
   }
+
 
   postNotification(data: any): Observable<any> {
     return this.http.post('http://localhost/bankapp/post_notification.php', data);
   }
 
   getUsers(): Observable<any> {
-    return this.http.get('http://localhost/bankapp/get_users.php');
+    return this.http.get('http://localhost/bankapp/get_users.php').pipe(
+      catchError(error => {
+        console.error('Error fetching users:', error);
+        return throwError(() => new Error('Error fetching users.'));
+      })
+    );
   }
+  
 
 
 }
