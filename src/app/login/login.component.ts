@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { MyApiCallsService } from '../service/my-api-calls.service';
+import { RouterModule } from '@angular/router';
 
 interface LoginData {
   email: string;
@@ -13,7 +14,7 @@ interface LoginData {
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [FormsModule, CommonModule, HttpClientModule],
+  imports: [FormsModule, CommonModule, HttpClientModule,RouterModule],
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']  // Make sure this path is correct
 })

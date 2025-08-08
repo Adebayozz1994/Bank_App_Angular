@@ -8,3 +8,13 @@
   line-height: 1.2;
   letter-spacing: 0.05em;
 }
+
+/* Ensure navbar stays on top */
+nav {
+  z-index: 1000;
+}
+
+/* Smooth transitions for dropdown menus */
+.dropdown-menu {
+  transition: all 0.3s ease-in-out;
+}

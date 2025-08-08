@@ -1,2 +1,4 @@
-<app-navbar></app-navbar>
-<router-outlet />
+<app-navbar *ngIf="showNavbar"></app-navbar>
+<div [class]="showNavbar ? 'with-navbar' : 'without-navbar'">
+  <router-outlet />
+</div>

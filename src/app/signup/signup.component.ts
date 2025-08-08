@@ -6,74 +6,84 @@ import { HttpClientModule } from '@angular/common/http';
 import { MaterialmoduleModule } from '../materialmodule/materialmodule.module';
 import { MyApiCallsService } from '../service/my-api-calls.service';
 
-
-
-interface ContactInterface{
-  first_name:string,
-  last_name:string,
-  email:string,
-  password:string,
-  address: string, 
-  phone_number:any,
-  gender:string,
-  role :string,
-  // 
+interface ContactInterface {
+  first_name: string;
+  last_name: string;
+  email: string;
+  password: string;
+  address: string;
+  phone_number: any;
+  gender: string;
+  role: string;
 }
 
 @Component({
   selector: 'app-signup',
   standalone: true,
-  imports: [FormsModule, CommonModule, HttpClientModule,MaterialmoduleModule],
+  imports: [FormsModule, CommonModule, HttpClientModule, MaterialmoduleModule],
   templateUrl: './signup.component.html',
   styleUrl: './signup.component.css'
 })
-
 export class SignupComponent {
-  constructor(public Router:Router,public MyApi:MyApiCallsService,public formBuilder:FormBuilder){}
-  message:any=''
-  public contact :ContactInterface ={
-    first_name:'',
-    last_name:'',
-    email:'',
-    password:'',
-    address:'',
-    phone_number:'',
-    gender:'',
-    role:''
-  
- }
+  constructor(
+    public Router: Router,
+    public MyApi: MyApiCallsService,
+    public formBuilder: FormBuilder
+  ) {}
 
- contactarray:any=[]
- submit() {
+  message: any = '';
+  isAdminLoggedIn = false;
 
-   const UserDetails = {
-     first_name: this.contact.first_name,
-     last_name: this.contact.last_name,
-     email: this.contact.email,
-     password: this.contact.password,
-     address: this.contact.address,
-     phone_number: this.contact.phone_number,
-     gender: this.contact.gender,
-     role: this.contact.role
-   }
-   console.log(UserDetails);
+  public contact: ContactInterface = {
+    first_name: '',
+    last_name: '',
+    email: '',
+    password: '',
+    address: '',
+    phone_number: '',
+    gender: '',
+    role: 'user' 
+  };
 
-  //  console.log('Phone Number:', UserDetails.phone_number);
-   this.MyApi.registerUser(UserDetails).subscribe(
-    (res: any) => {
-      console.log(res);
-      if (res.status) {
-        this.message = res.message; 
-        this.Router.navigate(['/login']);
-      } else {
-        this.message = res.message;
+  ngOnInit() {
+    // Check if its admin
+    const loggedInUser = localStorage.getItem('currentUser');
+    if (loggedInUser) {
+      const parsedUser = JSON.parse(loggedInUser);
+      if (parsedUser.role && parsedUser.role.toLowerCase() === 'admin') {
+        this.isAdminLoggedIn = true; 
       }
-    },
-    (error) => {
-      console.error('API Error:', error);
-      this.message = 'An error occurred during registration.';
     }
-  );
-}
-  
+  }
+
+  submit() {
+    const UserDetails = {
+      first_name: this.contact.first_name,
+      last_name: this.contact.last_name,
+      email: this.contact.email,
+      password: this.contact.password,
+      address: this.contact.address,
+      phone_number: this.contact.phone_number,
+      gender: this.contact.gender,
+      role: this.contact.role
+    };
+
+    console.log(UserDetails);
+
+    this.MyApi.registerUser(UserDetails).subscribe(
+      (res: any) => {
+        console.log(res);
+        if (res.status) {
+          this.message = res.message;
+          this.Router.navigate(['/login']);
+        } else {
+          this.message = res.message;
+        }
+      },
+      (error) => {
+        console.error('API Error:', error);
+        this.message = 'An error occurred during registration.';
+      }
+    );
+  }
 }

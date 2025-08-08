@@ -13,6 +13,9 @@ import { TransactionHistoryComponent } from './transaction-history/transaction-h
 import { AirtimedataComponent } from './airtimedata/airtimedata.component';
 import {AdminDashboardComponent} from './admin-dashboard/admin-dashboard.component';
 import { DepositComponent } from './deposit/deposit.component';
+import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
+import { ResetPasswordComponent } from './reset-password/reset-password.component';
+import { adminGuard } from './guards/admin.guard';
 
 
 
@@ -23,25 +26,16 @@ export const routes: Routes = [
     {path:'navbar', component: NavbarComponent},
     {path:'signup', component: SignupComponent},
     {path:'login', component: LoginComponent},
+    {path:'forgot-password', component: ForgotPasswordComponent},
+    {path:'reset-password', component: ResetPasswordComponent},
     {path:'profile', component: ProfileComponent},
-    {path:'admin-dashboard', component: AdminDashboardComponent},
-
+    {path:'admin-dashboard', component: AdminDashboardComponent, canActivate: [adminGuard]},
     {path:'about', component: AboutComponent},
     {path:'contact', component: ContactComponent},
     {path:'sendmoney', component: SendmoneyComponent},
     {path:'mainpage', component: MainpageComponent},
     {path:'transactionhistory', component: TransactionHistoryComponent},
     {path:'airtimedata', component: AirtimedataComponent},
-    {path: 'deposit', component: DepositComponent },
+    {path: 'deposit', component: DepositComponent, canActivate: [adminGuard] },
 
-
-
-   
-
-    
-
-
-
-    // {path:'back', component: FooterpageComponent},
-    // {path:'**', component: PageNotFoundComponent},
 ];

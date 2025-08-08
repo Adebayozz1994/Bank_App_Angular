@@ -1,27 +1,134 @@
 
 <div *ngIf="isLoading" class="container">
+  <!-- Floating Particles -->
+  <div class="loading-particle"></div>
+  <div class="loading-particle"></div>
+  <div class="loading-particle"></div>
+  <div class="loading-particle"></div>
+  
+  <!-- Brand Logo -->
+  <div class="loading-brand">
+    Welcome to <span class="brand-name">Swift-Bank</span>
+  </div>
+  
+  <!-- Loading Bars -->
+  <div class="loading-bars">
     <div class="bar"></div>
     <div class="bar"></div>
     <div class="bar"></div>
     <div class="bar"></div>
   </div>
+  
+  <!-- Loading Text -->
+  <div class="loading-text">
+    Preparing your banking experience...
+  </div>
+  
+  <!-- Progress Bar -->
+  <div class="loading-progress">
+    <div class="progress-bar"></div>
+  </div>
+</div>
 
+<div *ngIf="!isLoading" class="landing-wrapper">
+  <!-- Hero Section -->
+  <div class="hero-section">
+    <div class="hero-container">
+      <!-- Left Content -->
+      <div class="hero-content">
+        <div class="hero-text">
+          <h1 class="hero-title">
+            Welcome to <span class="brand-name">Swift-Bank</span>
+          </h1>
+          <p class="hero-subtitle">Your trusted banking partner for secure, fast, and reliable financial services</p>
+          
+          <!-- Features List -->
+          <div class="features-list">
+            <div class="feature-item">
+              <div class="feature-icon">🔒</div>
+              <span>Secure Transactions</span>
+            </div>
+            <div class="feature-item">
+              <div class="feature-icon">⚡</div>
+              <span>Instant Transfers</span>
+            </div>
+            <div class="feature-item">
+              <div class="feature-icon">📱</div>
+              <span>Mobile Banking</span>
+            </div>
+          </div>
+        </div>
 
-<div *ngIf="!isLoading" class="min-h-min bg-gray-100 flex flex-col justify-center items-center pt-10 pb-10">
-  <div class="max-w-4xl bg-white shadow-lg rounded-lg overflow-hidden lg:flex">
-    <div class="lg:w-1/2 bg-cover" style="background-image: url('../assets/Pictures/man-making-plans-renovate-house-using-laptop-smartphone.jpg');"></div>
-    <div class="p-8 lg:w-1/2">
-      <div class="text-center mb-8">
-        <h2 class="text-3xl font-bold text-gray-800">Welcome to Swift-Bank</h2>
-        <p class="text-gray-600">Your trusted banking partner</p>
+        <!-- Action Buttons -->
+        <div class="action-buttons">
+          <button class="btn btn-primary" (click)="signup()">
+            <span>Get Started</span>
+            <div class="btn-icon">→</div>
+          </button>
+          <button class="btn btn-secondary" (click)="login()">
+            <span>Sign In</span>
+          </button>
+        </div>
+
+        <!-- Links -->
+        <div class="help-links">
+          <p class="link-text">
+            New to Swift-Bank? <a routerLink="/signup" class="link">Create an account</a>
+          </p>
+          <p class="link-text">
+            <a routerLink="/forgot-password" class="link">Forgot your password?</a>
+          </p>
+        </div>
       </div>
 
-      <div class="flex justify-center mb-6">
-        <button class="mr-4 px-6 py-3 bg-red-600 text-white rounded-md hover:bg-red-700 focus:outline-none focus:bg-red-700" (click)="signup()">SIGNUP</button>
-        <button class="px-6 py-3 bg-gray-600 text-white rounded-md hover:bg-gray-700 focus:outline-none focus:bg-gray-700" (click)="login()">LOGIN</button>
+      <!-- Right Image -->
+      <div class="hero-image">
+        <div class="image-container">
+          <img src="../assets/Pictures/man-making-plans-renovate-house-using-laptop-smartphone.jpg" 
+               alt="Banking with Swift-Bank" 
+               class="main-image">
+          <div class="image-overlay"></div>
+          
+          <!-- Floating Cards -->
+          <div class="floating-card card-1">
+            <div class="card-icon">💳</div>
+            <div class="card-text">
+              <div class="card-title">Digital Wallet</div>
+              <div class="card-desc">Secure payments</div>
+            </div>
+          </div>
+          
+          <div class="floating-card card-2">
+            <div class="card-icon">📊</div>
+            <div class="card-text">
+              <div class="card-title">Analytics</div>
+              <div class="card-desc">Track spending</div>
+            </div>
+          </div>
+        </div>
       </div>
+    </div>
+  </div>
 
-      <p class="text-sm text-gray-500">Don't have an account? <a href="/signup" class="text-blue-600 hover:underline">Sign up here</a></p>
+  <!-- Trust Indicators -->
+  <div class="trust-section">
+    <div class="trust-container">
+      <div class="trust-item">
+        <div class="trust-number">1M+</div>
+        <div class="trust-label">Happy Customers</div>
+      </div>
+      <div class="trust-item">
+        <div class="trust-number">99.9%</div>
+        <div class="trust-label">Uptime</div>
+      </div>
+      <div class="trust-item">
+        <div class="trust-number">24/7</div>
+        <div class="trust-label">Support</div>
+      </div>
+      <div class="trust-item">
+        <div class="trust-number">256-bit</div>
+        <div class="trust-label">SSL Encryption</div>
+      </div>
     </div>
   </div>
 </div>

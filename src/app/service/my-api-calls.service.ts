@@ -194,6 +194,26 @@ export class MyApiCallsService {
       })
     );
   }
+
+  forgotPassword(data: any): Observable<any> {
+    return this.http.post('http://localhost/bankapp/forgot_password.php', data)
+      .pipe(
+        catchError(error => {
+          console.error('Error:', error);
+          return throwError(() => new Error('An error occurred while processing forgot password request.'));
+        })
+      );
+  }
+
+  resetPassword(data: any): Observable<any> {
+    return this.http.post('http://localhost/bankapp/reset_password.php', data)
+      .pipe(
+        catchError(error => {
+          console.error('Error:', error);
+          return throwError(() => new Error('An error occurred while resetting password.'));
+        })
+      );
+  }
   
 
 
