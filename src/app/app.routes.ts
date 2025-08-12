@@ -16,8 +16,8 @@ import { DepositComponent } from './deposit/deposit.component';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
 import { adminGuard } from './guards/admin.guard';
-
-
+import { AirtimeHistoryComponent } from './airtime-history/airtime-history.component';
+import { DataHistoryComponent } from './data-history/data-history.component';
 
 
 
@@ -37,5 +37,8 @@ export const routes: Routes = [
     {path:'transactionhistory', component: TransactionHistoryComponent},
     {path:'airtimedata', component: AirtimedataComponent},
     {path: 'deposit', component: DepositComponent, canActivate: [adminGuard] },
+    {path:'airtime-history', component: AirtimeHistoryComponent },
+    {path:'data-history', component: DataHistoryComponent },
+
 
 ];

@@ -4,7 +4,7 @@ import { inject } from '@angular/core';
 export const adminGuard: CanActivateFn = (route, state) => {
   const router = inject(Router);
 
-  const user = localStorage.getItem('user'); 
+  const user = localStorage.getItem('currentUser'); 
 
   if (user) {
     const parsedUser = JSON.parse(user);

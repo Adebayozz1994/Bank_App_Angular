@@ -215,6 +215,13 @@ export class MyApiCallsService {
       );
   }
   
+  getDataHistory(userId: number): Observable<any[]> {
+    return this.http.get<any[]>(`http://localhost/bankapp/get_data_history.php?user_id=${userId}`);
+  }
+
+  getAirtimeHistory(userId: number): Observable<any[]> {
+    return this.http.get<any[]>(`http://localhost/bankapp/get_airtime_history.php?user_id=${userId}`);
+  }
 
 
 }

@@ -74,7 +74,7 @@ export class SendmoneyComponent implements OnInit {
       this.buttonState = 'Sending';
       setTimeout(() => {
         this.showModal = true;
-        this.buttonState = 'Send Money'; // Reset button state once modal is shown
+        this.buttonState = 'Send Money'; 
       }, 2000);
     }
   }

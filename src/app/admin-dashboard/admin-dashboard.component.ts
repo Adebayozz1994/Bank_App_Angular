@@ -3,14 +3,14 @@ import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } 
 import { MyApiCallsService } from '../service/my-api-calls.service';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
-import { Router } from '@angular/router';  // Corrected import
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-admin-dashboard',
   standalone: true,
   imports: [FormsModule, CommonModule, HttpClientModule, ReactiveFormsModule],
   templateUrl: './admin-dashboard.component.html',
-  styleUrls: ['./admin-dashboard.component.css'] 
+  styleUrls: ['./admin-dashboard.component.css']
 })
 export class AdminDashboardComponent implements OnInit {
   depositData: any = {
@@ -18,7 +18,7 @@ export class AdminDashboardComponent implements OnInit {
     amount: 0,
     password: ''
   };
-  accountName: string = '';  // Account holder's name
+  accountName: string = '';
   message: string = '';
   isPasswordModalVisible: boolean = false;
   processing: boolean = false;
@@ -27,83 +27,70 @@ export class AdminDashboardComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  // Fetch account holder's name based on account number
   getAccountName(): void {
     if (this.depositData.accountNumber) {
       this.apiService.getAccountName(this.depositData.accountNumber).subscribe(
         (response) => {
           if (response && response.status === true) {
-            this.accountName = response.accountName || '';  // Set the account holder's name
+            this.accountName = response.accountName || '';
           } else {
-            this.accountName = '';  // Clear account name if not found
-            this.message = response.message || 'Account not found';
+            this.accountName = '';
+            this.showMessage(response.message || 'Account not found');
           }
         },
         (error) => {
           console.error('Error fetching account name:', error);
-          this.message = 'Error fetching account name';
+          this.showMessage('Error fetching account name');
         }
       );
     }
   }
 
-  // Open the password confirmation modal
   openPasswordModal(): void {
     this.processing = true;
-
-    // Show "Processing" for 2 seconds before displaying the password modal
     setTimeout(() => {
       this.processing = false;
       this.isPasswordModalVisible = true;
-    }, 2000);  // 2 seconds delay
+    }, 2000);
   }
 
-  // Close the modal
   closePasswordModal(): void {
     this.isPasswordModalVisible = false;
   }
 
-  // Confirm deposit action (after password is entered)
   confirmDeposit(): void {
     this.processing = true;
-
-    // Make the deposit API call with password
     this.apiService.deposit(this.depositData).subscribe(
       (response) => {
+        this.processing = false;
         if (response && response.status === true) {
-          this.closePasswordModal();  // Close the modal first
-
-          // Show success message after a short delay
-          setTimeout(() => {
-            this.message = 'Deposit successful';
-            this.processing = false;
-
-            // Navigate to the user profile after showing the success message
-            setTimeout(() => {
-              // this.router.navigate(['/profile']);
-            }, 2000);  // 2 seconds delay before navigating to allow the message to be visible
-          }, 500);  // Small delay before showing success message to ensure modal is closed
-
+          this.closePasswordModal();
+          this.showMessage('✅ Deposit successful');
         } else {
-          this.message = response.message || 'Deposit failed';
-          this.processing = false;
+          this.showMessage(response.message || '❌ Deposit failed');
         }
       },
       (error) => {
         console.error('Error making deposit:', error);
-        this.message = 'Deposit failed due to an error';
         this.processing = false;
+        this.showMessage('❌ Deposit failed due to an error');
       }
     );
   }
 
-  // Initial deposit action (opens modal for password confirmation)
   onDeposit(): void {
     if (!this.depositData.accountNumber || !this.depositData.amount) {
-      this.message = 'Please fill in all fields';
+      this.showMessage('⚠ Please fill in all fields');
       return;
     }
-    // Open modal to confirm password before proceeding with the deposit
     this.openPasswordModal();
+  }
+
+  // Helper to display message & auto-hide after 3 seconds
+  private showMessage(msg: string): void {
+    this.message = msg;
+    setTimeout(() => {
+      this.message = '';
+    }, 3000);
   }
 }
